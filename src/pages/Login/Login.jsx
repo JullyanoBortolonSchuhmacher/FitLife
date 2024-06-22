@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
-import { Box, Button, Container, TextField } from '@mui/material';
+import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import { useEffect, useState } from "react";
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm()
@@ -8,59 +9,57 @@ function Login() {
     console.log(data)
   }
 
+  let [colunas, setColunas] = useState(2);
+
+  useEffect(() => {
+    const colunasRespon = localStorage.getItem('colunas');
+    if (colunasRespon && parseInt(colunasRespon) > 2) { 
+      setColunas(2); 
+    } else {
+      setColunas(parseInt(colunasRespon) || 2); 
+    }
+  }, []);
 
   return ( 
     <>
-    <h2>LOGIN</h2>
-    <form onSubmit={handleSubmit(onSubmit)}>
-    <Container
-      sx={{
-        width: 'calc(100vw-8%)',
-        height: '100vh',
-        borderRadius: 24,
-        boxShadow: '.2em .2em 1em rgba(0, 0, 0, 0.3)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        marginX: 'calc(100vw-8%)', 
-      }}
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
       >
-        <Box>
-          <h1>Login</h1>
-        </Box>
-        <Container
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 2,
-            justifyContent: 'center',
-
-          }}
-        >
-          <Box>
+      <Box
+        width={colunas === 1 ? "100%" : "50%"}
+        boxShadow= '.2em .2em 1em #bbb'
+        borderRadius={`${colunas}em`}
+        p="5%"
+        display='grid'
+        gridTemplateColumns={`repeat(${colunas}, auto)`}
+        gap={5}
+      >
+        <Typography fontFamily="cursive" fontWeight="900" fontSize="2em">Login</Typography>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Container>
             <TextField type="email" id="email" label="E-mail" variant="standard" autoComplete="username"
               {...register('email', { required: true, pattern: /^\S+@\S+$/i })} 
+              error={errors.email ? true : false}
             />
-              {errors.email && <span>Por favor, insira um email válido.</span>}        
-          </Box>
-          <Box>
+          </Container>
+          <Container>
             <TextField type="password" id="senha" label="Senha" variant="standard" autoComplete="current-password"
-              {...register('password', { required: true, minLength: 6 })}
+              {...register('senha', { required: true, minLength: 6 })} 
+              error={errors.senha ? true : false}
             />
-            {errors.password && <span>A senha deve ter no mínimo 6 caracteres.</span>}
-          </Box>
+          </Container>
           <br />
-          <Box>
-            <a href="#">Cadastre-se aqui</a>
-          </Box>
-          <Box>
-            <Button id="Cadastro" type="submit" variant="contained">Entrar</Button>
-            <Button id="Voltar" variant="outlined">Voltar</Button>
-          </Box>
-        </Container>    
-      </Container>
-    </form>
-
+          <Container>
+            <Button type="submit" variant="contained">Entrar</Button>
+            <Button sx={{marginLeft: '1.5em'}} variant="outlined">voltar</Button>
+          </Container>
+        </form>
+      </Box>
+    </Box>
+    
     </>
    );
 }
