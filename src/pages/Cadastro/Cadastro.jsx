@@ -1,18 +1,20 @@
 import { useForm } from "react-hook-form";
-import { Box, Button, Container, TextField, Select, MenuItem } from '@mui/material';
-import DataNascimentoInput from "../../components/inputDate";
+import { Box, Button, Container, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+
+// inputs importados
+import DataNascimentoInput from "../../components/inputDate";
+import GeneroSelect from '../../components/inputGender';
+import CpfInput from '../../components/inputCpf';
+import EnderecoInput from '../../components/inputEndereco';
 
 function Cadastro() {
   const { register, handleSubmit, control, formState: { errors } } = useForm();
-  const [genero, setGenero] = useState("Masculino");
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     localStorage.setItem("usuario1", JSON.stringify(data))
     console.log(JSON.parse(localStorage.getItem('usuario1')));
   };
-
-  const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 
   let [colunas, setColunas] = useState(2);
   useEffect(() => {
@@ -31,7 +33,7 @@ function Cadastro() {
         sx={{
           boxShadow: '.2em .2em 1em #bbb',
           borderRadius: `${colunas}em`,
-          height: '80vh'
+          height: '100vh'
         }}
         >
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -63,35 +65,26 @@ function Cadastro() {
             />
 
             {/* CPF */}
-            <TextField 
-              type="text" 
-              id="cpf" 
-              label="CPF" 
-              variant="standard" 
-              autoComplete="off"
-              {...register('cpf', {
+            <CpfInput
+              control={control}
+              name="cpf"
+              rules={{
                 required: 'CPF é obrigatório',
                 pattern: {
-                  value: cpfRegex,
                   message: 'CPF inválido'
-                },
-                setValueAs: (value) => value.replace(/\D/g, '').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
-              })}
-              error={errors.cpf ? true : false}
+                }
+              }}
+              error={!!errors.cpf}
+              errorMessage={errors.cpf?.message}
             />
 
             {/* Gênero */}
-            <Select
-              id="genero"
-              value={genero}
-              onChange={(e) => setGenero(e.target.value)}
-              {...register('genero', { required: 'Gênero é obrigatório' })}
-              error={errors.genero ? true : false}
-            >
-              <MenuItem value="Masculino">Masculino</MenuItem>
-              <MenuItem value="Feminino">Feminino</MenuItem>
-              <MenuItem value="Outro">Outro</MenuItem>
-            </Select>
+            <GeneroSelect
+              control={control}
+              name="genero"
+              rules={{ required: 'Gênero é obrigatório' }}
+              error={!!errors.genero}
+            />
             
             {/* E-mail */}
             <TextField 
@@ -114,7 +107,17 @@ function Cadastro() {
               {...register('senha', { required: true, minLength: 6 })}
               error={errors.senha ? true : false}
             />
-            
+          {/* Endereço */}
+          
+          <EnderecoInput
+              control={control}
+              name="endereco"
+              rules={{
+                required: 'Endereço é obrigatório'
+              }}
+              error={!!errors.endereco}
+              errorMessage={errors.endereco?.message}
+            />  
           </Box>
           <br />
           <Box

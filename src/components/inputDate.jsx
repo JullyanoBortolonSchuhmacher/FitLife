@@ -10,7 +10,11 @@ function DataNascimentoInput() {
   const [dataAtual, setDataAtual] = useState(dayjs());
 
   const handleDateChange = (date) => {
-    setDataAtual(date);
+    if (date && date.isValid()) {
+      setDataAtual(date);
+    } else {
+      setDataAtual(null);
+    }
   };
 
   return (
@@ -20,7 +24,9 @@ function DataNascimentoInput() {
         value={dataAtual}
         onChange={handleDateChange}
         format="DD/MM/YYYY"
-        renderInput={(params) => <TextField {...params} />}
+        components={{
+          TextField: (props) => <TextField {...props} />
+        }}
       />
     </LocalizationProvider>
   );
