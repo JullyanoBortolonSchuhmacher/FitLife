@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import "./index.css"
+
+
 // rotas
 import { RouterProvider } from 'react-router-dom';
 import router from './Router/Router';
 
 // colocando numero de colunas --> vai ficar responsivo
-localStorage.setItem('colunas', 3);
+localStorage.setItem('colunas', 1);
 
 localStorage.setItem('logado', true);
 

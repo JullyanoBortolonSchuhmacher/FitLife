@@ -32,7 +32,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
 
   return (
     <>
-    <h1>Endereço</h1>
+    <h4>Endereço</h4>
     <Controller
       name={name}
       control={control}
@@ -47,88 +47,88 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
       rules={rules}
       render={({ field, fieldState }) => (
         <Grid container spacing={2}>
-          <Grid item xs={4}>
-            <TextField
-              {...field}
-              id="cep"
-              label="CEP"
-              variant="standard"
-              autoComplete="off"
-              value={cep}
-              onChange={handleCepChange}
-              inputProps={{ maxLength: 9 }}
-              error={fieldState.invalid? error : false}
-          helperText={fieldState.invalid? errorMessage : ''}
-            />
-          </Grid>
-          <Grid item xs={8}>
-            <TextField
-              {...field}
-              id="rua"
-              label="Rua"
-              variant="standard"
-              autoComplete="off"
-              value={rua}
-              onChange={(e) => setRua(e.target.value)}
-              error={fieldState.invalid? error : false}
-              helperText={fieldState.invalid? errorMessage : ''}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              {...field}
-              id="cidade"
-              label="Cidade"
-              variant="standard"
-              autoComplete="off"
-              value={cidade}
-              onChange={(e) => setCidade(e.target.value)}
-              error={fieldState.invalid? error : false}
-              helperText={fieldState.invalid? errorMessage : ''}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              {...field}
-              id="estado"
-              label="Estado"
-              variant="standard"
-              autoComplete="off"
-              value={estado}
-              onChange={(e) => setEstado(e.target.value)}
-              inputProps={{ maxLength: 2 }}
-              error={fieldState.invalid? error : false}
-              helperText={fieldState.invalid? errorMessage : ''}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              {...field}
-              id="bairro"
-              label="Bairro"
-              variant="standard"
-              autoComplete="off"
-              value={bairro}
-              onChange={(e) => setBairro(e.target.value)}
-              error={fieldState.invalid? error : false}
-              helperText={fieldState.invalid? errorMessage : ''}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              {...field}
-              id="numero"
-              label="Número"
-              variant="standard"
-              autoComplete="off"
-              value={numero}
-              onChange={handleNumeroChange}
-              inputProps={{ maxLength: 6 }}
-              error={fieldState.invalid? error : false}
-              helperText={fieldState.invalid? errorMessage : ''}
-           />
-          </Grid>
+        <Grid item xs={3}>
+          <TextField
+            {...field}
+            id="cep"
+            label="CEP"
+            variant="standard"
+            autoComplete="off"
+            value={cep}
+            onChange={handleCepChange}
+            inputProps={{ maxLength: 9 }}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
         </Grid>
+        <Grid item xs={4}>
+          <TextField
+            {...field}
+            id="rua"
+            label="Rua"
+            variant="standard"
+            autoComplete="off"
+            value={rua}
+            onChange={(e) => setRua(e.target.value)}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            {...field}
+            id="estado"
+            label="Estado"
+            variant="standard"
+            autoComplete="off"
+            value={estado}
+            onChange={(e) => setEstado(e.target.value)}
+            inputProps={{ maxLength: 2 }}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            {...field}
+            id="cidade"
+            label="Cidade"
+            variant="standard"
+            autoComplete="off"
+            value={cidade}
+            onChange={(e) => setCidade(e.target.value)}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            {...field}
+            id="numero"
+            label="Número"
+            variant="standard"
+            autoComplete="off"
+            value={numero}
+            onChange={handleNumeroChange}
+            inputProps={{ maxLength: 6 }}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <TextField
+            {...field}
+            id="bairro"
+            label="Bairro"
+            variant="standard"
+            autoComplete="off"
+            value={bairro}
+            onChange={(e) => setBairro(e.target.value)}
+            error={fieldState.invalid ? error : false}
+            helperText={fieldState.invalid ? errorMessage : ''}
+          />
+        </Grid>
+      </Grid>
       )}
     />
     </>
