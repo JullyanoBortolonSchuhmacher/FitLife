@@ -12,12 +12,8 @@ function Login() {
   let [colunas, setColunas] = useState(2);
 
   useEffect(() => {
-    const colunasRespon = localStorage.getItem('colunas');
-    if (colunasRespon && parseInt(colunasRespon) > 2) { 
-      setColunas(2); 
-    } else {
-      setColunas(parseInt(colunasRespon) || 2); 
-    }
+    // é o que fica mais bonito 🩻
+    setColunas(2); 
   }, []);
 
   return ( 
@@ -37,7 +33,17 @@ function Login() {
         gridTemplateColumns={`repeat(${colunas}, auto)`}
         gap={5}
       >
-        <Typography fontFamily="cursive" fontWeight="900" fontSize="2em">Login</Typography>
+        <Box
+          display={'flex'}
+          flexDirection={'column'}
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Typography fontFamily="cursive" fontWeight="900" fontSize="2em">Login</Typography>
+          <hr width={'250rem'} />
+          <img src="/sapiens.svg" alt="logn" width={'300rem'} />
+        </Box>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <Container>
             <TextField type="email" id="email" label="E-mail" variant="standard" autoComplete="username"
