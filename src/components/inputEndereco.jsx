@@ -61,12 +61,13 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             helperText={fieldState.invalid ? errorMessage : ''}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={6}>
           <TextField
             {...field}
             id="rua"
             label="Rua"
             variant="standard"
+            fullWidth={1}
             autoComplete="off"
             value={rua}
             onChange={(e) => setRua(e.target.value)}

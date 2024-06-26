@@ -1,7 +1,10 @@
+import { Typography } from '@mui/material'
+
 function Home() {
   return ( 
     <>
-      <h1>HOME</h1>
+      <Typography></Typography>
+      <h1>FitLife</h1>
     </>
    );
 }

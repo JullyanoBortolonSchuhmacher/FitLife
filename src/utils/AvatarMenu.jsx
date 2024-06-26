@@ -1,12 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const AvatarMenu = ({ isLogado, handleLogin }) => {
+const AvatarMenu = ({ handleLogin }) => {
   const [ancorandoUsuario, setAncorandoUsuario] = useState(null);
+  const [isLogado, setIsLogado] = useState(false); // Estado inicial falso
   const navigate = useNavigate();
+
+  // Função para verificar o localStorage e atualizar o estado isLogado
+  const checkLoginStatus = () => {
+    const logado = localStorage.getItem('logado');
+    setIsLogado(logado === 'true');
+  };
+
+  useEffect(() => {
+    checkLoginStatus(); 
+  }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      checkLoginStatus(); 
+    };
+
+    window.addEventListener('storage', handleStorageChange); 
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange); 
+    };
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAncorandoUsuario(event.currentTarget);
@@ -20,6 +43,8 @@ const AvatarMenu = ({ isLogado, handleLogin }) => {
     handleCloseUserMenu();
     if (setting.toLowerCase() === 'logout') {
       handleLogin();
+      setIsLogado(false); 
+      localStorage.setItem('logado', 'false'); 
     } else {
       navigate(`/${setting.toLowerCase()}`);
     }
@@ -35,7 +60,7 @@ const AvatarMenu = ({ isLogado, handleLogin }) => {
         </Tooltip>
       ) : (
         <>
-          <Button variant='contained' color="inherit" onClick={() => navigate('/cadastro')}>
+          <Button variant='contained' color="secondary" onClick={() => navigate('/cadastro')} sx={{ marginRight: 4 }}>
             Cadastrar
           </Button>
           <Button variant='outlined' color="inherit" onClick={() => navigate('/login')}>

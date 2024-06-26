@@ -1,5 +1,5 @@
 import { Card, Box } from '@mui/material';
-import OI from '../../components/switchTema'
+import OI from '../../components/buttonTema'
 
 function Dashboard() {
   const nome = "Maria"

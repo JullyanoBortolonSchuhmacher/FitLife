@@ -8,8 +8,9 @@ import { RouterProvider } from 'react-router-dom';
 import router from './Router/Router';
 
 // colocando numero de colunas --> vai ficar responsivo
-localStorage.setItem('colunas', 1);
+localStorage.setItem('colunas', 2);
 
+// usuario --> sera automatico
 localStorage.setItem('logado', true);
 
 

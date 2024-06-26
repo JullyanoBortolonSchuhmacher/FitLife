@@ -1,14 +1,10 @@
 import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Box, Menu, MenuItem, Container } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Typography, Box, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import BotaoTema from './switchTema';
+import BotaoTema from './buttonTema';
 import AvatarMenu from '../utils/AvatarMenu';
 
-const pages = ['Home', 'Cadastro', 'Login'];
-
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = useState(null);
   const [isLogado, setIsLogado] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
@@ -17,14 +13,6 @@ const Header = () => {
     const loggedIn = localStorage.getItem('logado');
     setIsLogado(loggedIn === 'true');
   }, []);
-
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleLogin = () => {
     if (isLogado) {
@@ -40,9 +28,9 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="sticky">
+    <AppBar position="sticky" >
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography
             variant="h6"
             noWrap
@@ -58,45 +46,8 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            FitLife
           </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => { navigate(`/${page.toLowerCase()}`); handleCloseNavMenu(); }}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
           <Typography
             variant="h5"
             noWrap
@@ -115,20 +66,14 @@ const Header = () => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => { navigate(`/${page.toLowerCase()}`); handleCloseNavMenu(); }}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
+          <Box
+            display="flex"
+            flexDirection="row"
+            gap={3}
+          >
+            <AvatarMenu isLogado={isLogado} handleLogin={handleLogin} />
+            <BotaoTema checked={isDarkMode} onChange={handleDarkMode} color="default" />
           </Box>
-
-          <AvatarMenu isLogado={isLogado} handleLogin={handleLogin} />
-          <BotaoTema checked={isDarkMode} onChange={handleDarkMode} color="default" />
         </Toolbar>
       </Container>
     </AppBar>

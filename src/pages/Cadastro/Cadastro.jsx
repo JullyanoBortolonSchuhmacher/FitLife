@@ -38,8 +38,6 @@ function Cadastro() {
         >
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box
-            py="16%"
-            mt="4%"
             mx="8%"
             display='grid'
             gridTemplateColumns={`repeat(${colunas}, auto)`}
@@ -107,9 +105,12 @@ function Cadastro() {
               {...register('senha', { required: true, minLength: 6 })}
               error={errors.senha ? true : false}
             />
-          {/* Endereço */}
-          
-          <EnderecoInput
+          </Box>
+          <Box
+            mx="8%"
+          >
+            {/* Endereço */}
+            <EnderecoInput
               control={control}
               name="endereco"
               rules={{
@@ -117,7 +118,7 @@ function Cadastro() {
               }}
               error={!!errors.endereco}
               errorMessage={errors.endereco?.message}
-            />  
+              />  
           </Box>
           <br />
           <Box
