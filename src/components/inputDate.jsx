@@ -4,23 +4,29 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
-
-console.log(dayjs())
+import 'dayjs/locale/pt-br';
 
 function DataNascimentoInput() {
   const [dataAtual, setDataAtual] = useState(dayjs());
 
   const handleDateChange = (date) => {
-    setDataAtual(date);
+    if (date && date.isValid()) {
+      setDataAtual(date);
+    } else {
+      setDataAtual(null);
+    }
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="pt-br">
       <DatePicker
         label="Data de Nascimento"
         value={dataAtual}
         onChange={handleDateChange}
-        renderInput={(params) => <TextField {...params} />}
+        format="DD/MM/YYYY"
+        components={{
+          TextField: (props) => <TextField {...props} />
+        }}
       />
     </LocalizationProvider>
   );
