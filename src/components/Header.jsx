@@ -24,7 +24,7 @@ const Header = () => {
 
 
   return (
-    <AppBar position="sticky">
+    <AppBar color="primary" position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Box, Button, Container, TextField, Checkbox, Typography } from '@mui/material';
+import { Box, Button, TextField, Checkbox, Typography, Paper } from '@mui/material';
 import DataNascimentoInput from "../../components/inputDate";
 import GeneroSelect from '../../components/inputGender';
 import CpfInput from '../../components/inputCpf';
@@ -38,6 +38,7 @@ function Cadastro() {
 
   const onSubmit = (data) => {
     const { confirmaEmail, confirmaSenha, ...userData } = data;
+    console.log(confirmaEmail, confirmaSenha)
     addUser(userData);
     setTimeout(() => {
       window.location.href = '/login';
@@ -49,15 +50,18 @@ function Cadastro() {
    return (
     <>
       <Box display="flex" justifyContent="center" />
-      <Container
+      <Paper
         sx={{
-          boxShadow: '.2em .2em 1em #bbb',
           borderRadius: `${colunas}em`,
-          height: '90vh'
+          height: `${colunas < 2 ? '120vh' : '87vh' }`,
         }}
+        elevation={24}
       >
+        <Box justifyContent='center' display='flex'>
+          <Typography variant="h2">Cadastro</Typography>
+        </Box>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas >= 3 ? '12%' : '5%' }}>
+          <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas < 2 ? '4%' : '8%' }}>
             <TextField
               type="text"
               id="nome"
@@ -67,6 +71,7 @@ function Cadastro() {
               {...register('nome', { required: true, minLength: 3 })}
               error={errors.nome ? true : false}
               helperText={errors.nome ? 'Nome deve ter pelo menos 3 caracteres' : ''}
+              fullWidth
             />
             <DataNascimentoInput
               control={control}
@@ -161,15 +166,15 @@ function Cadastro() {
               id="termos"
               required
             />
-            <Typography>Aceito os <a href="#termos">Termos de Serviço</a></Typography>
+            <Typography>Aceito os <a style={{color: 'inherit', fontWeight: '600'}} href="#termos">Termos de Serviço</a></Typography>
             {errors.termos && <Typography color="error">É necessário aceitar os termos</Typography>}
           </Box>
-          <Box justifyContent='center' display='grid' gridTemplateColumns={`repeat(2, auto)`} gap={3}>
+          <Box my={3} justifyContent='center' display='grid' gridTemplateColumns={`repeat(2, auto)`} gap={3}>
             <Button type="submit" variant="contained">Cadastrar</Button>
             <Button variant="outlined" href="/" >Voltar</Button>
           </Box>
         </form>
-      </Container>
+      </Paper>
     </>
   );
 }

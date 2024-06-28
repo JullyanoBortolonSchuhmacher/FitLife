@@ -2,10 +2,10 @@
   "usuarios": [
     {
       "id": "7423",
-      "email": "admin@e",
+      "email": "mariafer@gmail.com",
       "senha": "aadmin",
       "nome": "Maria Fernanda",
-      "genero": "Outro",
+      "genero": "Feminino",
       "endereco": {
         "cep": "89850204",
         "rua": "123",
@@ -14,7 +14,7 @@
         "numero": "41",
         "bairro": "1222"
       },
-      "avatar": "/iconesUser/avatar3.jpg"
+      "avatar": "/iconesUser/avatar5.jpg"
     },
     {
       "id": "c47c",
