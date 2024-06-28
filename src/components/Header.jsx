@@ -1,23 +1,18 @@
-import { useState, useEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Container } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import BotaoTema from './buttonTema';
 import AvatarMenu from '../utils/AvatarMenu';
+import { useUsers } from '../context/UserContext';
+import { useEffect, useState } from 'react';
 
 const Header = () => {
-  const [isLogado, setIsLogado] = useState(false);
+  const { isLogado, logoutUser } = useUsers();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const loggedIn = localStorage.getItem('logado');
-    setIsLogado(loggedIn === 'true');
-  }, []);
-
   const handleLogin = () => {
     if (isLogado) {
-      localStorage.setItem('logado', 'false');
-      setIsLogado(false);
+      logoutUser();
     } else {
       navigate('/login');
     }
@@ -27,8 +22,9 @@ const Header = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+
   return (
-    <AppBar position="sticky" >
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography
@@ -64,7 +60,7 @@ const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            <img src="iconFitLife.svg" width={'50px'} alt="FitLife" />
           </Typography>
           <Box
             display="flex"

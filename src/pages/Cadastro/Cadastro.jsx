@@ -1,134 +1,172 @@
 import { useForm } from "react-hook-form";
-import { Box, Button, Container, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
-
-// inputs importados
+import { Box, Button, Container, TextField, Checkbox, Typography } from '@mui/material';
 import DataNascimentoInput from "../../components/inputDate";
 import GeneroSelect from '../../components/inputGender';
 import CpfInput from '../../components/inputCpf';
 import EnderecoInput from '../../components/inputEndereco';
+import { useUsers } from '../../context/UserContext'; 
+import { useTemaContext } from '../../context/ThemeContext'
 
 function Cadastro() {
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  const numeroAleatorio = Math.floor(Math.random() * 7) + 1;
+
+  const { register, handleSubmit, control, formState: { errors }, watch } = useForm({
+    defaultValues: {
+      nome: '',
+      dataNascimento: '',
+      cpf: '',
+      genero: '',
+      email: '',
+      senha: '',
+      endereco: {
+        cep: '',
+        rua: '',
+        cidade: '',
+        estado: '',
+        bairro: '',
+        numero: '',
+      },
+      avatar: numeroAleatorio
+    }
+  });
+
+  const { addUser } = useUsers(); 
+  const { gridColumns } = useTemaContext();
+
+  const colunas = gridColumns
+
 
   const onSubmit = (data) => {
-    localStorage.setItem("usuario1", JSON.stringify(data))
-    console.log(JSON.parse(localStorage.getItem('usuario1')));
+    const { confirmaEmail, confirmaSenha, ...userData } = data;
+    addUser(userData);
+    setTimeout(() => {
+      window.location.href = '/login';
+      console.log("Cadastrado!")
+      alert("Cadastrado com Sucesso! ");
+    }, 1500);
   };
 
-  let [colunas, setColunas] = useState(2);
-  useEffect(() => {
-    const colunasRespon = localStorage.getItem('colunas');
-      setColunas(parseInt(colunasRespon)); 
-  }, []);
-
-  return (
+   return (
     <>
-    <Box
-      display="flex"
-      justifyContent="center"
-    >
-    </Box>
+      <Box display="flex" justifyContent="center" />
       <Container
         sx={{
           boxShadow: '.2em .2em 1em #bbb',
           borderRadius: `${colunas}em`,
-          height: '100vh'
+          height: '90vh'
         }}
-        >
+      >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box
-            mx="8%"
-            display='grid'
-            gridTemplateColumns={`repeat(${colunas}, auto)`}
-            gap={3}
-          >
-            {/* Nome */}
-            <TextField 
-              type="text" 
-              id="nome" 
-              label="Nome" 
-              variant="standard" 
+          <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas >= 3 ? '12%' : '5%' }}>
+            <TextField
+              type="text"
+              id="nome"
+              label="Nome"
+              variant="standard"
               autoComplete="name"
-              {...register('nome', { required: true })} 
+              {...register('nome', { required: true, minLength: 3 })}
               error={errors.nome ? true : false}
+              helperText={errors.nome ? 'Nome deve ter pelo menos 3 caracteres' : ''}
             />
-            
-            {/* Data de Nascimento */}
-            <DataNascimentoInput 
+            <DataNascimentoInput
               control={control}
               name="dataNascimento"
               rules={{ required: 'Data de nascimento é obrigatória' }}
               error={errors.dataNascimento ? true : false}
             />
-
-            {/* CPF */}
             <CpfInput
               control={control}
               name="cpf"
-              rules={{
-                required: 'CPF é obrigatório',
-                pattern: {
-                  message: 'CPF inválido'
-                }
-              }}
+              rules={{ required: 'CPF é obrigatório' }}
               error={!!errors.cpf}
               errorMessage={errors.cpf?.message}
             />
-
-            {/* Gênero */}
             <GeneroSelect
               control={control}
               name="genero"
               rules={{ required: 'Gênero é obrigatório' }}
               error={!!errors.genero}
             />
-            
-            {/* E-mail */}
-            <TextField 
-              type="email" 
-              id="email" 
-              label="E-mail" 
-              variant="standard" 
-              autoComplete="username"
-              {...register('email', { required: true, pattern: /^\S+@\S+$/i })} 
-              error={errors.email ? true : false}
-            />
-            
-            {/* Senha */}
-            <TextField 
-              type="password" 
-              id="senha" 
-              label="Senha" 
-              variant="standard" 
-              autoComplete="new-password"
-              {...register('senha', { required: true, minLength: 6 })}
-              error={errors.senha ? true : false}
-            />
+            <Box display='grid' gridTemplateColumns={`repeat(${colunas-1}, auto)`} gap={3}>
+              <TextField
+                type="email"
+                id="email"
+                label="E-mail"
+                variant="standard"
+                autoComplete="username"
+                {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
+                error={errors.email ? true : false}
+                helperText={errors.email ? 'E-mail inválido' : ''}
+              />
+              <TextField
+                type="email"
+                id="confirmaEmail"
+                label="Confirmação de E-mail"
+                variant="standard"
+                autoComplete="username"
+                required
+                {...register('confirmaEmail', {
+                  required: true,
+                  validate: (value) => value === watch('email') || 'Os E-mails não coincidem'
+                })}
+                error={errors.confirmaEmail ? true : false}
+                helperText={errors.confirmaEmail ? errors.confirmaEmail.message : ''}
+              />
+            </Box>
+              <Box display='grid' gridTemplateColumns={`repeat(${colunas-1}, auto)`} gap={3}>
+                <TextField
+                  type="password"
+                  id="senha"
+                  label="Senha"
+                  variant="standard"
+                  autoComplete="new-password"
+                  {...register('senha', {
+                    required: true,
+                    minLength: 6,
+                  })}
+                  error={errors.senha ? true : false}
+                  helperText={errors.senha ? errors.senha.message : ''}
+                />
+                <TextField
+                  type="password"
+                  id="confirmaSenha"
+                  label="Confirmação de Senha"
+                  variant="standard"
+                  autoComplete="new-password"
+                  required
+                  {...register('confirmaSenha', {
+                    required: true,
+                    validate: (value) => value === watch('senha') || 'As senhas não coincidem'
+                  })}
+                  error={errors.confirmaSenha ? true : false}
+                  helperText={errors.confirmaSenha ? errors.confirmaSenha.message : ''}
+                />
+            </Box>
           </Box>
-          <Box
-            mx="8%"
-          >
-            {/* Endereço */}
+          <Box mx="8%">
             <EnderecoInput
               control={control}
               name="endereco"
-              rules={{
-                required: 'Endereço é obrigatório'
-              }}
+              rules={{ required: 'Endereço é obrigatório' }}
               error={!!errors.endereco}
               errorMessage={errors.endereco?.message}
-              />  
+            />
+          </Box>
+          <Box display="flex" alignItems="center" mx="8%">
+
           </Box>
           <br />
-          <Box
-            justifyContent='center'
-            display='grid'
-            gridTemplateColumns={`repeat(2, auto)`}
-            gap={3}
-          >
+          <Box justifyContent='center' display='flex' alignItems='center'>
+            <Checkbox
+              id="termos"
+              required
+            />
+            <Typography>Aceito os <a href="#termos">Termos de Serviço</a></Typography>
+            {errors.termos && <Typography color="error">É necessário aceitar os termos</Typography>}
+          </Box>
+          <Box justifyContent='center' display='grid' gridTemplateColumns={`repeat(2, auto)`} gap={3}>
             <Button type="submit" variant="contained">Cadastrar</Button>
-            <Button variant="outlined">Voltar</Button>
+            <Button variant="outlined" href="/" >Voltar</Button>
           </Box>
         </form>
       </Container>
