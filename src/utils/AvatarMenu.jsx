@@ -1,50 +1,35 @@
-import { useState, useEffect } from 'react';
-import { IconButton, Avatar, Menu, MenuItem, Tooltip, Typography, Button, Box } from '@mui/material';
+import { useState, useContext } from 'react';
+import { IconButton, Avatar, Menu, MenuItem, Tooltip, Button, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
+const defaultAvatar = '/iconesUser/avatar7.jpg';
 
 const AvatarMenu = ({ handleLogin }) => {
-  const [ancorandoUsuario, setAncorandoUsuario] = useState(null);
-  const [isLogado, setIsLogado] = useState(false); // Estado inicial falso
+  const [anchoredUser, setAnchoredUser] = useState(null);
+  const { isLogado, logoutUser, getUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  // Função para verificar o localStorage e atualizar o estado isLogado
-  const checkLoginStatus = () => {
-    const logado = localStorage.getItem('logado');
-    setIsLogado(logado === 'true');
-  };
-
-  useEffect(() => {
-    checkLoginStatus(); 
-  }, []);
-
-  useEffect(() => {
-    const handleStorageChange = () => {
-      checkLoginStatus(); 
-    };
-
-    window.addEventListener('storage', handleStorageChange); 
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange); 
-    };
-  }, []);
+  const userData = getUser();
+  const avatarUrl = localStorage.getItem('userAvatar');
+  const avatar = avatarUrl ? avatarUrl : defaultAvatar;
 
   const handleOpenUserMenu = (event) => {
-    setAncorandoUsuario(event.currentTarget);
+    setAnchoredUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
-    setAncorandoUsuario(null);
+    setAnchoredUser(null);
   };
 
   const handleMenuItemClick = (setting) => {
     handleCloseUserMenu();
     if (setting.toLowerCase() === 'logout') {
       handleLogin();
-      setIsLogado(false); 
-      localStorage.setItem('logado', 'false'); 
+      logoutUser();
+    } else if (setting.toLowerCase() === 'profile' && userData?.id) {
+      navigate(`/profile/${userData.id}`);
     } else {
       navigate(`/${setting.toLowerCase()}`);
     }
@@ -55,7 +40,7 @@ const AvatarMenu = ({ handleLogin }) => {
       {isLogado ? (
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="User Avatar" src={avatar} />
           </IconButton>
         </Tooltip>
       ) : (
@@ -69,9 +54,8 @@ const AvatarMenu = ({ handleLogin }) => {
         </>
       )}
       <Menu
-        sx={{ mt: '45px' }}
         id="menu-appbar"
-        anchorEl={ancorandoUsuario}
+        anchorEl={anchoredUser}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'right',
@@ -81,12 +65,12 @@ const AvatarMenu = ({ handleLogin }) => {
           vertical: 'top',
           horizontal: 'right',
         }}
-        open={Boolean(ancorandoUsuario)}
+        open={Boolean(anchoredUser)}
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={() => handleMenuItemClick(setting)}>
-            <Typography textAlign="center">{setting}</Typography>
+            {setting}
           </MenuItem>
         ))}
       </Menu>
