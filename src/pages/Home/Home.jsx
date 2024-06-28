@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography, styled } from '@mui/material';
+import { Box, Button, Paper, Typography, styled } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import backgroundImage from '../../assets/padroes.png'; 
 
@@ -32,7 +32,7 @@ const Home = () => {
           p: 4,
         }}
       >
-        <Container sx={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', p: 4, borderRadius: 2, maxWidth: 600 }}>
+        <Paper sx={{ p: 4, borderRadius: 2, maxWidth: 600 }}>
           <Typography variant="h3" component="h1" gutterBottom>
             Bem-vindo ao FitLife
           </Typography>
@@ -45,7 +45,7 @@ const Home = () => {
               Comece agora
             </Button>
           </Box>
-        </Container>
+        </Paper>
       </Box>
     </>
   );

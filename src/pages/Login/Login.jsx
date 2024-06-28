@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography, Paper } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../context/UserContext';
@@ -19,7 +19,7 @@ function Login() {
       const user = await loginUser(data.email, data.senha);
       console.log("Login realizado", user);
       setTimeout(() => {
-        navigate("/home");
+        navigate("/dashboard");
       }, 1000);
     } catch (error) {
       setErroLogin(error.message);
@@ -36,14 +36,16 @@ function Login() {
         transition: 'all 0.3s ease'
       }}
     >
-      <Box
-        width={colunas === 1 ? "100%" : "70%"}
-        boxShadow='.2em .2em 1em #bbb'
-        borderRadius={`${colunas}em`}
-        p="5%"
-        display='grid'
-        gridTemplateColumns={`repeat(${colunas - 1}, auto)`}
-        gap={5}
+      <Paper
+        sx={{
+          paddingX: '5%',
+          borderRadius: `${colunas}em`,
+          display: 'grid',
+          gridTemplateColumns: `repeat(${colunas - 1}, 1fr)`,
+          gap: 5,
+          width: colunas === 1 ? "100%" : "70%",
+        }}
+        elevation={24}
       >
         {colunas >= 2 && (
           <Box
@@ -54,14 +56,14 @@ function Login() {
             <Typography fontFamily="cursive" fontWeight="900" fontSize="2em">Login</Typography>
             <p>Bem-vindo(a) novamente!</p>
             <hr width={'250px'} />
-            <Typography fontFamily="Inter" color="#777" fontWeight="400" fontSize="0.8em">Não possuí cadastro? <a href="/cadastro">Cadastre-se aqui</a></Typography>
+            <Typography fontFamily="Inter" color="#777" fontWeight="400" fontSize="0.8em">Não possuí cadastro? <a style={{color: 'inherit', fontWeight: '900'}} href="/cadastro">Cadastre-se aqui</a></Typography>
             <img src="/sapiens.png" alt="login" width={'300px'} />
           </Box>
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%' }}>
           <Box
-            my={9}
+            my={5}
             display='flex'
             flexDirection='column'
           >
@@ -85,7 +87,7 @@ function Login() {
             </Box>
           </Box>
         </form>
-      </Box>
+      </Paper>
     </Box>
   );
 }
