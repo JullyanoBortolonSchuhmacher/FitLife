@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { Button, styled } from '@mui/material';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
+import { useTemaContext } from '../context/ThemeContext';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 const ButtonTema = styled(Button)(() => ({
   padding: 8,
@@ -11,18 +11,24 @@ const ButtonTema = styled(Button)(() => ({
 }));
 
 const BotaoTema = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { mode, setMode } = useTemaContext();
+  const IconComponent = mode === 'light' ? DarkModeOutlinedIcon : LightModeOutlinedIcon;
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+  const toggleTheme = () => {
+    const newMode = mode === 'light' ? 'dark' : 'light';
+    setMode(newMode);
+    localStorage.setItem('tema', newMode);
   };
 
   return (
     <ButtonTema
-      onClick={toggleDarkMode}
+      onClick={toggleTheme}
       variant="text"
       color="inherit"
-      startIcon={darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+      startIcon={<IconComponent />}
+      sx={{
+        transition: 'all 0.3s ease',
+      }}
     >
     </ButtonTema>
   );

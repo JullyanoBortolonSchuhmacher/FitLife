@@ -1,0 +1,61 @@
+{
+  "usuarios": [
+    {
+      "id": "7423",
+      "email": "admin@e",
+      "senha": "aadmin",
+      "nome": "Maria Fernanda",
+      "genero": "Outro",
+      "endereco": {
+        "cep": "89850204",
+        "rua": "123",
+        "estado": "CE",
+        "cidade": "Tocantins",
+        "numero": "41",
+        "bairro": "1222"
+      },
+      "avatar": "/iconesUser/avatar3.jpg"
+    },
+    {
+      "id": "c47c",
+      "nome": "Maria Fernanda",
+      "dataNascimento": "1988-08-18",
+      "cpf": "542.145.247-20",
+      "genero": "Feminino",
+      "email": "mariafer@gmail.com",
+      "senha": "123456",
+      "endereco": {
+        "cep": "89850204",
+        "rua": "Rua Fernando Texeira",
+        "cidade": "Tocantins",
+        "estado": "CE",
+        "bairro": "centro",
+        "numero": "41"
+      },
+      "avatar": null
+    },
+    {
+      "id": "b563",
+      "nome": "Maria Fernanda",
+      "dataNascimento": "1988-08-18",
+      "cpf": "542.145.247-20",
+      "genero": "Feminino",
+      "email": "mariafer@gmail.com",
+      "senha": "123123",
+      "endereco": {
+        "cep": "89850204",
+        "rua": "Rua Fernando Texeira",
+        "cidade": "Tocantins",
+        "estado": "CE",
+        "bairro": "centro",
+        "numero": "401"
+      },
+      "avatar": "/iconesUser/avatar5.jpg"
+    }
+  ],
+  "exercicios": [
+    {
+      "id": "7f0c"
+    }
+  ]
+}

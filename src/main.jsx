@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "./index.css"
+import "./index.css";
 
-
-// rotas
+// Rotas
 import { RouterProvider } from 'react-router-dom';
 import router from './Router/Router';
 
-// colocando numero de colunas --> vai ficar responsivo
-localStorage.setItem('colunas', 2);
-
-// usuario --> sera automatico
-localStorage.setItem('logado', true);
-
+// Contextos
+import { UserProvider } from './context/UserContext';
+import { TemaProviderComponent } from './context/ThemeContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <TemaProviderComponent>
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
+    </TemaProviderComponent>
   </React.StrictMode>
 );
