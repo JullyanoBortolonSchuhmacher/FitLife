@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { apiUrl } from '../config';
 
 export const UserContext = createContext();
 
@@ -9,7 +10,7 @@ export const UserProvider = ({ children }) => {
     const estadoLocalStorage = JSON.parse(localStorage.getItem('logado'));
     return estadoLocalStorage ? estadoLocalStorage : false;
   });
-  const apiUrl = 'http://localhost:3001';
+
 
   useEffect(() => {
     localStorage.setItem('logado', JSON.stringify(isLogado));

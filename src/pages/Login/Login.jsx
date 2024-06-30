@@ -8,8 +8,7 @@ import { useState } from 'react';
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [erroLogin, setErroLogin] = useState("");
-  const { gridColumns } = useTemaContext();
-  const colunas = gridColumns;
+  const { colunas } = useTemaContext();
   const navigate = useNavigate();
   const { loginUser } = useUsers();
 
@@ -17,7 +16,9 @@ function Login() {
     setErroLogin(""); // limpa outros erros
     try {
       const user = await loginUser(data.email, data.senha);
-      console.log("Login realizado", user);
+      console.log("Login realizado", user.email, );
+      console.log(`Bem vind${user.genero === 'feminino' ? 'a' : 'o'}`, user.nome);
+
       setTimeout(() => {
         navigate("/dashboard");
       }, 1000);
@@ -38,6 +39,7 @@ function Login() {
     >
       <Paper
         sx={{
+          paddingY: '50px',
           paddingX: '5%',
           borderRadius: `${colunas}em`,
           display: 'grid',

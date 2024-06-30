@@ -1,61 +1,108 @@
 {
   "usuarios": [
     {
-      "id": "7423",
-      "email": "mariafer@gmail.com",
-      "senha": "aadmin",
-      "nome": "Maria Fernanda",
-      "genero": "Feminino",
-      "endereco": {
-        "cep": "89850204",
-        "rua": "123",
-        "estado": "CE",
-        "cidade": "Tocantins",
-        "numero": "41",
-        "bairro": "1222"
-      },
+      "id": "1",
+      "email": "1@e.com",
+      "senha": "123123",
+      "nome": "admin",
+      "genero": "masculino",
       "avatar": "/iconesUser/avatar5.jpg"
     },
     {
-      "id": "c47c",
-      "nome": "Maria Fernanda",
-      "dataNascimento": "1988-08-18",
-      "cpf": "542.145.247-20",
-      "genero": "Feminino",
-      "email": "mariafer@gmail.com",
-      "senha": "123456",
-      "endereco": {
-        "cep": "89850204",
-        "rua": "Rua Fernando Texeira",
-        "cidade": "Tocantins",
-        "estado": "CE",
-        "bairro": "centro",
-        "numero": "41"
-      },
-      "avatar": null
+      "id": "1",
+      "email": "1@e.com",
+      "senha": "123123",
+      "nome": "admin",
+      "genero": "feminino",
+      "avatar": "/iconesUser/avatar5.jpg"
     },
     {
-      "id": "b563",
-      "nome": "Maria Fernanda",
-      "dataNascimento": "1988-08-18",
-      "cpf": "542.145.247-20",
-      "genero": "Feminino",
-      "email": "mariafer@gmail.com",
+      "id": "fd08",
+      "nome": "Felipe da Silva",
+      "dataNascimento": "1987-09-25",
+      "cpf": "142.514.251-42",
+      "genero": "masculino",
+      "email": "felipe@outlook.com",
       "senha": "123123",
       "endereco": {
-        "cep": "89850204",
-        "rua": "Rua Fernando Texeira",
-        "cidade": "Tocantins",
-        "estado": "CE",
-        "bairro": "centro",
-        "numero": "401"
+        "cep": "01001000",
+        "rua": "Praça da Sé",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "bairro": "Sé",
+        "numero": "1"
       },
-      "avatar": "/iconesUser/avatar5.jpg"
+      "avatar": "/iconesUser/avatar4.jpg"
+    },
+    {
+      "id": "d243",
+      "nome": "Felipe da Silva",
+      "dataNascimento": "1987-09-25",
+      "cpf": "142.514.251-42",
+      "genero": "feminino",
+      "email": "felipe@outlook.com",
+      "senha": "323232",
+      "endereco": {
+        "cep": "64000550",
+        "rua": "Rua Professor José Amável",
+        "cidade": "Teresina",
+        "estado": "PI",
+        "bairro": "Cabral",
+        "numero": "12"
+      },
+      "avatar": "/iconesUser/avatar3.jpg"
+    },
+    {
+      "id": "dd42",
+      "nome": "Joao da Silva Nunes",
+      "dataNascimento": "1979-06-16",
+      "cpf": "123.123.123-12",
+      "genero": "masculino",
+      "email": "joaosilva@gmail.com",
+      "senha": "12345678",
+      "endereco": {
+        "cep": "64000550",
+        "rua": "Rua Professor José Amável ",
+        "cidade": "Teresinaa",
+        "estado": "MT",
+        "bairro": "Cabrala",
+        "numero": "23"
+      },
+      "avatar": "/iconesUser/avatar4.jpg"
     }
   ],
   "exercicios": [
     {
-      "id": "7f0c"
+      "id": "8ab1",
+      "descricao": "23132",
+      "duracao": "2312",
+      "nome": "Ciclismo",
+      "userId": "d243",
+      "dataCriacao": "29/06/2024, 22:40"
+    },
+    {
+      "id": "a6c4",
+      "descricao": "32",
+      "duracao": "2",
+      "nome": "Ciclismo",
+      "userId": "fd08",
+      "dataCriacao": "29/06/2024, 22:41"
+    },
+    {
+      "id": "55a0",
+      "descricao": "Correr 5km todos os dias",
+      "duracao": "24",
+      "nome": "Caminhada",
+      "userId": "dd42",
+      "dataCriacao": "29/06/2024, 23:21"
+    },
+    {
+      "id": "762a",
+      "descricao": "Nadar 200m todos os dias",
+      "duracao": "45",
+      "nome": "Natação",
+      "userId": "dd42",
+      "dataCriacao": "29/06/2024, 23:21"
     }
   ]
 }

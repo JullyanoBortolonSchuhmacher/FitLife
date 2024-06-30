@@ -5,9 +5,9 @@ import PopupAtualizarCadastro from '../../utils/PopupAtualizarCadastro';
 import SyncIcon from '@mui/icons-material/Sync';
 
 const Profile = () => {
-  const { getUserById, updateUser } = useUsers();
   const [userData, setUserData] = useState(null);
   const [openEditDialog, setOpenEditDialog] = useState(false);
+  const { getUserById, updateUser } = useUsers();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,6 +21,7 @@ const Profile = () => {
     fetchUser();
   }, [getUserById]);
 
+  
   const handleEditOpen = () => {
     setOpenEditDialog(true);
   };

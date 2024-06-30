@@ -1,7 +1,7 @@
 import { Controller } from 'react-hook-form';
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import estados from '../utils/estados.json'; 
+import estados from '../data/estados.json'; 
 import useViaCep from '../hook/viaCep'; 
 
 const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
@@ -23,6 +23,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
                 label="CEP"
                 type="tel"
                 variant="standard"
+                required
                 autoComplete="off"
                 inputProps={{ maxLength: 8 }}
                 error={!!error || !!cepError}
@@ -78,7 +79,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             {error && <p>{errorMessage}</p>}
           </FormControl>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Controller
             name={`${name}.cidade`}
             control={control}
@@ -87,8 +88,10 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
               <TextField
                 {...field}
                 id="cidade"
+                type='text'
                 label="Cidade"
                 variant="standard"
+                fullWidth
                 autoComplete="off"
                 error={error}
                 helperText={errorMessage}
@@ -97,7 +100,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             )}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Controller
             name={`${name}.numero`}
             control={control}
@@ -127,6 +130,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
                 {...field}
                 id="bairro"
                 label="Bairro"
+                type='text'
                 variant="standard"
                 autoComplete="off"
                 error={error}
