@@ -12,11 +12,11 @@ function Cadastro() {
 
   const { register, handleSubmit, control, formState: { errors }, watch } = useForm({
     defaultValues: {
-      nome: '',
+      nome: ''.toLowerCase(),
       dataNascimento: '',
       cpf: '',
-      genero: '',
-      email: '',
+      genero: ''.toLowerCase(),
+      email: ''.toLowerCase(),
       senha: '',
       endereco: {
         cep: '',
@@ -26,15 +26,12 @@ function Cadastro() {
         bairro: '',
         numero: '',
       },
-      avatar: numeroAleatorio
+      avatar: `/iconesUser/avatar${numeroAleatorio}.jpg`
     }
   });
 
   const { addUser } = useUsers(); 
-  const { gridColumns } = useTemaContext();
-
-  const colunas = gridColumns
-
+  const { colunas } = useTemaContext();
 
   const onSubmit = (data) => {
     const { confirmaEmail, confirmaSenha, ...userData } = data;
@@ -42,14 +39,13 @@ function Cadastro() {
     addUser(userData);
     setTimeout(() => {
       window.location.href = '/login';
-      console.log("Cadastrado!")
+      console.log("Cadastrado! avatar: ", numeroAleatorio)
       alert("Cadastrado com Sucesso! ");
     }, 1500);
   };
 
    return (
     <>
-      <Box display="flex" justifyContent="center" />
       <Paper
         sx={{
           borderRadius: `${colunas}em`,
@@ -106,7 +102,7 @@ function Cadastro() {
               <TextField
                 type="email"
                 id="confirmaEmail"
-                label="Confirmação de E-mail"
+                label="Confirmae seu E-mail"
                 variant="standard"
                 autoComplete="username"
                 required
@@ -135,7 +131,7 @@ function Cadastro() {
                 <TextField
                   type="password"
                   id="confirmaSenha"
-                  label="Confirmação de Senha"
+                  label="Confirme sua Senha"
                   variant="standard"
                   autoComplete="new-password"
                   required

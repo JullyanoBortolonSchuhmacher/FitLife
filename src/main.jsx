@@ -9,12 +9,15 @@ import router from './Router/Router';
 // Contextos
 import { UserProvider } from './context/UserContext';
 import { TemaProviderComponent } from './context/ThemeContext';
+import { ExerciciosProvider } from './context/ExerciciosContext'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <TemaProviderComponent>
       <UserProvider>
-        <RouterProvider router={router} />
+        <ExerciciosProvider>
+          <RouterProvider router={router} />
+        </ExerciciosProvider>
       </UserProvider>
     </TemaProviderComponent>
   </React.StrictMode>
