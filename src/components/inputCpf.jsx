@@ -32,6 +32,7 @@ const InputCpf = ({ control, name, rules, error, errorMessage }) => {
         <TextField
           {...field}
           id="cpf"
+          type='tel'
           label="CPF"
           variant="standard"
           autoComplete="off"

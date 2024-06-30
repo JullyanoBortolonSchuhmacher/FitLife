@@ -45,12 +45,14 @@ const AvatarMenu = ({ handleLogin }) => {
         </Tooltip>
       ) : (
         <>
-          <Button variant='contained' color="secondary" onClick={() => navigate('/cadastro')} sx={{ marginRight: 4 }}>
-            Cadastrar
-          </Button>
-          <Button variant='outlined' color="inherit" onClick={() => navigate('/login')}>
-            Login
-          </Button>
+          <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+            <Button variant='contained' color="secondary" onClick={() => navigate('/cadastro')} sx={{ marginRight: 2 }}>
+              Cadastrar
+            </Button>
+            <Button variant='outlined' color="inherit" onClick={() => navigate('/login')}>
+              Login
+            </Button>
+          </Box>
         </>
       )}
       <Menu

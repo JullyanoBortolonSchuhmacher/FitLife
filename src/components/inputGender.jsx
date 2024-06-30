@@ -17,9 +17,9 @@ const GeneroSelect = ({ control, name, rules, error }) => {
             value={field.value || ''}
             onChange={(e) => field.onChange(e.target.value)}
           >
-            <MenuItem value={"Masculino"}>Masculino</MenuItem>
-            <MenuItem value={"Feminino"}>Feminino</MenuItem>
-            <MenuItem value={"Outro"}>Outro</MenuItem>
+            <MenuItem value={"masculino"}>Masculino</MenuItem>
+            <MenuItem value={"feminino"}>Feminino</MenuItem>
+            <MenuItem value={"outro"}>Outro</MenuItem>
           </Select>
           {error && <FormHelperText>Este campo é obrigatório</FormHelperText>}
         </FormControl>

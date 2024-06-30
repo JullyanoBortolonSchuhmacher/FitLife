@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <AppBar color="primary" position="sticky">
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+        <Toolbar disableGutters sx={{ justifyContent: 'space-evenly' }}>
           <Typography
             variant="h6"
             noWrap
@@ -48,9 +48,10 @@ const Header = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
+              mt: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -58,6 +59,7 @@ const Header = () => {
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              alignItems: 'center',
             }}
           >
             <img src="iconFitLife.svg" width={'50px'} alt="FitLife" />

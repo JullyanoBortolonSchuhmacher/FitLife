@@ -41,7 +41,7 @@ const Home = () => {
             Crie um perfil, defina suas metas, registre suas atividades físicas e acompanhe seu progresso, tudo em um só lugar.
           </Typography>
           <Box mt={4}>
-            <Button variant="contained" color="primary" component={RouterLink} to="/login">
+            <Button variant="contained" color="primary" component={RouterLink} to="/dashboard">
               Comece agora
             </Button>
           </Box>

@@ -43,11 +43,11 @@ export const TemaProviderComponent = ({ children }) => {
 
   const isMobile = useMediaQuery(tema.breakpoints.down('sm'));
   const isTablet = useMediaQuery(tema.breakpoints.down('md'));
-  const gridColumns = isMobile ? 1 : isTablet ? 2 : 3;
+  const colunas = isMobile ? 1 : isTablet ? 2 : 3;
   const gridRows = isMobile ? 1 : isTablet ? 2 : 3;
 
   return (
-    <ThemeContext.Provider value={{ tema, mode, setMode, gridColumns, gridRows }}>
+    <ThemeContext.Provider value={{ tema, mode, setMode, colunas, gridRows }}>
       <ThemeProvider theme={tema}>
         {children}
       </ThemeProvider>
