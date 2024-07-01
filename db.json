@@ -1,28 +1,19 @@
 {
   "usuarios": [
     {
-      "id": "1",
-      "email": "1@e.com",
-      "senha": "123123",
-      "nome": "admin",
-      "genero": "masculino",
-      "avatar": "/iconesUser/avatar5.jpg"
+      "id": 1,
+      "nome": "Administrador",
+      "email": "admin@adm.com",
+      "senha": "123456",
+      "cpf": "000.000.000-00"
     },
     {
-      "id": "1",
-      "email": "1@e.com",
-      "senha": "123123",
-      "nome": "admin",
-      "genero": "feminino",
-      "avatar": "/iconesUser/avatar5.jpg"
-    },
-    {
-      "id": "fd08",
-      "nome": "Felipe da Silva",
-      "dataNascimento": "1987-09-25",
-      "cpf": "142.514.251-42",
-      "genero": "masculino",
-      "email": "felipe@outlook.com",
+      "id": "fe38",
+      "nome": "123122",
+      "dataNascimento": "2024-07-19",
+      "cpf": "123.123.123-12",
+      "genero": "prefironaodizer",
+      "email": "123123@e.aans",
       "senha": "123123",
       "endereco": {
         "cep": "01001000",
@@ -30,79 +21,89 @@
         "cidade": "São Paulo",
         "estado": "SP",
         "bairro": "Sé",
-        "numero": "1"
+        "numero": "312"
       },
       "avatar": "/iconesUser/avatar4.jpg"
     },
     {
-      "id": "d243",
-      "nome": "Felipe da Silva",
-      "dataNascimento": "1987-09-25",
-      "cpf": "142.514.251-42",
+      "id": "86d4",
+      "nome": "Maria Fernanda Aguiar",
+      "dataNascimento": "1998-07-19",
+      "cpf": "345.124.140-41",
       "genero": "feminino",
-      "email": "felipe@outlook.com",
-      "senha": "323232",
+      "email": "mariafernanda@gmail.com",
+      "senha": "12345678",
       "endereco": {
         "cep": "64000550",
-        "rua": "Rua Professor José Amável",
-        "cidade": "Teresina",
-        "estado": "PI",
-        "bairro": "Cabral",
-        "numero": "12"
+        "rua": "Praça da Sé",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "bairro": "Sé",
+        "numero": "408"
+      },
+      "avatar": "/iconesUser/avatar4.jpg"
+    },
+    {
+      "id": "e89d",
+      "nome": "José Felipe da Silva",
+      "dataNascimento": "2001-12-24",
+      "cpf": "214.504.064-71",
+      "genero": "masculino",
+      "email": "josefelipesil@gmail.com",
+      "senha": "123456",
+      "endereco": {
+        "cep": "88801630",
+        "rua": "",
+        "cidade": "",
+        "estado": "",
+        "bairro": "",
+        "numero": "528"
       },
       "avatar": "/iconesUser/avatar3.jpg"
     },
     {
-      "id": "dd42",
-      "nome": "Joao da Silva Nunes",
-      "dataNascimento": "1979-06-16",
-      "cpf": "123.123.123-12",
-      "genero": "masculino",
-      "email": "joaosilva@gmail.com",
-      "senha": "12345678",
+      "id": "66f1",
+      "nome": "Artur Machado Pereira",
+      "dataNascimento": "1985-04-28",
+      "cpf": "751.451.851-98",
+      "genero": "prefironaodizer",
+      "email": "arturmachado@gmail.com",
+      "senha": "28041985",
       "endereco": {
-        "cep": "64000550",
-        "rua": "Rua Professor José Amável ",
-        "cidade": "Teresinaa",
-        "estado": "MT",
-        "bairro": "Cabrala",
-        "numero": "23"
+        "cep": "07091140",
+        "rua": "Rua das Adáliasa",
+        "cidade": "Guarulhoas",
+        "estado": "SC",
+        "bairro": "Jardim Bebaedouro",
+        "numero": "212"
       },
       "avatar": "/iconesUser/avatar4.jpg"
     }
   ],
   "exercicios": [
     {
-      "id": "8ab1",
-      "descricao": "23132",
-      "duracao": "2312",
+      "id": "0169",
+      "descricao": "Trajeto Beira Mar 300m",
+      "duracao": "15",
       "nome": "Ciclismo",
-      "userId": "d243",
-      "dataCriacao": "29/06/2024, 22:40"
+      "userId": "66f1",
+      "dataCriacao": "28/06/2024, 17:35"
     },
     {
-      "id": "a6c4",
-      "descricao": "32",
-      "duracao": "2",
-      "nome": "Ciclismo",
-      "userId": "fd08",
-      "dataCriacao": "29/06/2024, 22:41"
+      "id": "v2c6",
+      "descricao": "3 sessões de levantamento de 3kg de peso",
+      "duracao": "15",
+      "nome": "Musculação",
+      "userId": "e89d",
+      "dataCriacao": "29/06/2024, 18:05"
     },
     {
-      "id": "55a0",
-      "descricao": "Correr 5km todos os dias",
-      "duracao": "24",
-      "nome": "Caminhada",
-      "userId": "dd42",
-      "dataCriacao": "29/06/2024, 23:21"
-    },
-    {
-      "id": "762a",
-      "descricao": "Nadar 200m todos os dias",
-      "duracao": "45",
-      "nome": "Natação",
-      "userId": "dd42",
-      "dataCriacao": "29/06/2024, 23:21"
+      "id": "4f21",
+      "descricao": "3 sessões 10 de alongamento",
+      "duracao": "15",
+      "nome": "Yoga",
+      "userId": "e89d",
+      "dataCriacao": "29/06/2024, 18:25"
     }
   ]
 }

@@ -6,16 +6,13 @@ import useTemaGlobal from '../hook/temaGlobal';
 const ThemeContext = createContext();
 
 export const TemaProviderComponent = ({ children }) => {
-  const [mode, setMode] = useState('');
+  const [mode, setMode] = useState(() => {
+     return localStorage.getItem('tema') || 'dark';
+  });
 
   useEffect(() => {
-    const temaAtual = localStorage.getItem('tema');
-    if (temaAtual) {
-      setMode(temaAtual);
-    } else {
-      setMode('light');
-    }
-  }, []);
+    localStorage.setItem('tema', mode);
+  }, [mode]);
 
   useTemaGlobal(mode);
 

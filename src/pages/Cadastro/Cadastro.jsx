@@ -49,15 +49,30 @@ function Cadastro() {
       <Paper
         sx={{
           borderRadius: `${colunas}em`,
-          height: `${colunas < 2 ? '120vh' : '87vh' }`,
+          height: {
+            xs: '140vh',    
+            sm: 'calc(100% * 1.1)', 
+            md: '70vh',   
+          },
+          marginTop: {
+            xs: '2%',
+            sm: '2%',
+            md: '-1%',
+          },
+          margin: {
+            xs: '1rem',
+            sm: '1rem',
+            md: '4rem',
+          },
+          paddingBottom: '2%',
         }}
         elevation={24}
       >
-        <Box justifyContent='center' display='flex'>
+        <Box justifyContent='center' display='flex' padding={3}>
           <Typography variant="h2">Cadastro</Typography>
         </Box>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas < 2 ? '4%' : '8%' }}>
+          <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas < 2 ? '10px' : '4%' }}>
             <TextField
               type="text"
               id="nome"
@@ -88,7 +103,7 @@ function Cadastro() {
               rules={{ required: 'Gênero é obrigatório' }}
               error={!!errors.genero}
             />
-            <Box display='grid' gridTemplateColumns={`repeat(${colunas-1}, auto)`} gap={3}>
+            <Box display='grid' gridTemplateColumns={`1, auto)`} gap={3}>
               <TextField
                 type="email"
                 id="email"
@@ -114,7 +129,7 @@ function Cadastro() {
                 helperText={errors.confirmaEmail ? errors.confirmaEmail.message : ''}
               />
             </Box>
-              <Box display='grid' gridTemplateColumns={`repeat(${colunas-1}, auto)`} gap={3}>
+              <Box display='grid' gridTemplateColumns={`repeat(1, auto)`} gap={3}>
                 <TextField
                   type="password"
                   id="senha"
@@ -148,7 +163,6 @@ function Cadastro() {
             <EnderecoInput
               control={control}
               name="endereco"
-              rules={{ required: 'Endereço é obrigatório' }}
               error={!!errors.endereco}
               errorMessage={errors.endereco?.message}
             />

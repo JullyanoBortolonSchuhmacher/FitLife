@@ -1,12 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Controller } from 'react-hook-form';
-import { TextField } from '@mui/material';
+import { TextField, Link } from '@mui/material';
 import PropTypes from 'prop-types';
+import { UserContext } from '../context/UserContext';
 
 const InputCpf = ({ control, name, rules, error, errorMessage }) => {
+  const { users } = useContext(UserContext);
   const [cpf, setCpf] = useState('');
+  const [cpfError, setCpfError] = useState('');
 
-  const handleCpfChange = (event) => {
+  useEffect(() => {
+    const checaCpfExistente = async () => {
+      const response = await fetch('http://localhost:3001/usuarios');
+      const data = await response.json();
+      const cpfLista = data.map(user => user.cpf);
+
+      if (cpfLista.includes(cpf)) {
+        setCpfError('CPF já cadastrado. Clique aqui para fazer login.');
+      } else {
+        setCpfError('');
+      }
+    };
+
+    if (cpf.length === 14) {
+      checaCpfExistente();
+    } else {
+      setCpfError('');
+    }
+  }, [cpf]);
+
+  const handleMudacaCpf = (event) => {
     let value = event.target.value;
     value = value.replace(/\D/g, '');
 
@@ -32,18 +55,25 @@ const InputCpf = ({ control, name, rules, error, errorMessage }) => {
         <TextField
           {...field}
           id="cpf"
-          type='tel'
+          type="tel"
           label="CPF"
           variant="standard"
           autoComplete="off"
           value={cpf}
           onChange={(event) => {
-            handleCpfChange(event);
+            handleMudacaCpf(event);
             field.onChange(event);
           }}
           inputProps={{ maxLength: 14 }}
-          error={fieldState.invalid? error : false}
-          helperText={fieldState.invalid? errorMessage : ''}
+          error={fieldState.invalid || !!cpfError ? error : false}
+          helperText={fieldState.invalid || cpfError ? (cpfError || errorMessage) : ''}
+          InputProps={{
+            endAdornment: cpfError && (
+              <Link href="/login" color="error">
+                {cpfError}
+              </Link>
+            ),
+          }}
         />
       )}
     />

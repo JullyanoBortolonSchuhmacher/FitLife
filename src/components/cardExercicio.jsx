@@ -5,19 +5,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PopupExercicio from '../utils/popupExercicio';
 import { useExercicios } from '../context/ExerciciosContext';
+import PropTypes from 'prop-types';
+
 
 const ExercicioCard = ({ exercicio }) => {
   const { deletaExercicio } = useExercicios();
   const userId = localStorage.getItem('userId');
 
-  const [openEditPopup, setOpenEditPopup] = useState(false);
+  const [popUpAberto, setPopUpAberto] = useState(false);
 
-  const handleEditClick = () => {
-    setOpenEditPopup(true);
+  const handleAbrePopUp = () => {
+    setPopUpAberto(true);
   };
 
-  const handleCloseEditPopup = () => {
-    setOpenEditPopup(false);
+  const handleFechaPopUp = () => {
+    setPopUpAberto(false);
+  };
+
+  const handleDeletarConf = () => {
+    if (window.confirm('Tem certeza de que deseja deletar este exercício?')) {
+      deletaExercicio(exercicio.id);
+    }
   };
 
   return (
@@ -37,18 +45,29 @@ const ExercicioCard = ({ exercicio }) => {
         </Box>
         {exercicio.userId === userId && (
           <Box sx={{ display: 'flex', justifyContent: 'space-evenly', marginTop: 2 }}>
-            <IconButton color="error" onClick={() => deletaExercicio(exercicio.id)}>
+            <IconButton color="error" onClick={handleDeletarConf}>
               <DeleteIcon />
             </IconButton>
-            <IconButton color="secondary" onClick={handleEditClick}>
+            <IconButton color="secondary" onClick={handleAbrePopUp}>
               <EditIcon />
             </IconButton>
           </Box>
         )}
       </Card>
-      <PopupExercicio open={openEditPopup} onClose={handleCloseEditPopup} exercicio={exercicio} />
+      <PopupExercicio open={popUpAberto} onClose={handleFechaPopUp} exercicio={exercicio} />
     </>
   );
+};
+
+ExercicioCard.propTypes = {
+  exercicio: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    nome: PropTypes.string.isRequired,
+    duracao: PropTypes.number.isRequired,
+    descricao: PropTypes.string,
+    dataCriacao: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default ExercicioCard;

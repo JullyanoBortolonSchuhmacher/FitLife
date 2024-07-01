@@ -1,8 +1,8 @@
 import { Controller } from 'react-hook-form';
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import estados from '../data/estados.json'; 
-import useViaCep from '../hook/viaCep'; 
+import estados from '../data/estados.json';
+import useViaCep from '../hook/viaCep';
 
 const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
   const { endereco, error: cepError, fetchEndereco } = useViaCep();
@@ -11,7 +11,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
     <>
       <Typography color='inherit'>Endereço</Typography>
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Controller
             name={`${name}.cep`}
             control={control}
@@ -23,7 +23,6 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
                 label="CEP"
                 type="tel"
                 variant="standard"
-                required
                 autoComplete="off"
                 inputProps={{ maxLength: 8 }}
                 error={!!error || !!cepError}
@@ -33,7 +32,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             )}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={6} md={4}>
           <Controller
             name={`${name}.rua`}
             control={control}
@@ -53,7 +52,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             )}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={6} md={2}>
           <FormControl variant="standard" error={error}>
             <InputLabel id="estado-label">UF</InputLabel>
             <Controller
@@ -79,7 +78,27 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             {error && <p>{errorMessage}</p>}
           </FormControl>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Controller
+            name={`${name}.numero`}
+            control={control}
+            rules={rules}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="numero"
+                type="number"
+                label="Número"
+                variant="standard"
+                autoComplete="off"
+                inputProps={{ maxLength: 6 }}
+                error={error}
+                helperText={errorMessage}
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
           <Controller
             name={`${name}.cidade`}
             control={control}
@@ -100,27 +119,7 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
             )}
           />
         </Grid>
-        <Grid item xs={2}>
-          <Controller
-            name={`${name}.numero`}
-            control={control}
-            rules={rules}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                id="numero"
-                type="number"
-                label="Número"
-                variant="standard"
-                autoComplete="off"
-                inputProps={{ maxLength: 6 }}
-                error={error}
-                helperText={errorMessage}
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Controller
             name={`${name}.bairro`}
             control={control}
