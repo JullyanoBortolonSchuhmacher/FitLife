@@ -3,11 +3,12 @@ import { Box, Typography, Button, Avatar, Paper } from '@mui/material';
 import { useUsers } from '../../context/UserContext';
 import PopupAtualizarCadastro from '../../utils/PopupAtualizarCadastro';
 import SyncIcon from '@mui/icons-material/Sync';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
-  const [openEditDialog, setOpenEditDialog] = useState(false);
-  const { getUserById, updateUser } = useUsers();
+  const [abrirPopUp, setAbrirPopUp] = useState(false);
+  const { getUserById, updateUser, deleteUser, logoutUser } = useUsers();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,20 +22,26 @@ const Profile = () => {
     fetchUser();
   }, [getUserById]);
 
-  
-  const handleEditOpen = () => {
-    setOpenEditDialog(true);
+  const handleFecharEdicao = () => {
+    setAbrirPopUp(true);
   };
 
   const handleEditClose = () => {
-    setOpenEditDialog(false);
+    setAbrirPopUp(false);
   };
 
   const handleSaveData = async (updatedData) => {
     const updatedUser = { ...userData, ...updatedData };
     await updateUser(updatedUser);
     setUserData(updatedUser);
-    setOpenEditDialog(false);
+    setAbrirPopUp(false);
+  };
+
+  const handleDeletarUser = async () => {
+    if (window.confirm('Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.')) {
+      await deleteUser(userData.id);
+      logoutUser();
+    }
   };
 
   if (!userData) {
@@ -42,8 +49,8 @@ const Profile = () => {
   }
 
   return (
-    <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh'}}>
-      <Box sx={{ justifyContent: 'center', px: '8%', py: '3%', borderRadius: '8px'}}>
+    <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh' }}>
+      <Box sx={{ justifyContent: 'center', px: '8%', py: '3%', borderRadius: '8px' }}>
         <Avatar alt="Imagem de Perfil" src={userData.avatar || '/iconesUser/default_avatar.png'} style={{ width: '100px', height: '100px', marginBottom: '20px' }} />
         <Typography variant="h5">{userData.nome}</Typography>
         <Typography variant="body1">Gênero: {userData.genero}</Typography>
@@ -52,22 +59,32 @@ const Profile = () => {
         <Typography variant="body2">{userData.endereco?.rua}, {userData.endereco?.numero}</Typography>
         <Typography variant="body2">{userData.endereco?.bairro}</Typography>
         <Typography variant="body2">{userData.endereco?.cidade} - {userData.endereco?.estado}, CEP: {userData.endereco?.cep}</Typography>
-
-        <Button
-          sx={{ marginTop: '20px', padding: '1rem', fontSize: '1.2em' }}
-          variant="contained"
-          color="primary"
-          onClick={handleEditOpen}
-          startIcon={<SyncIcon icon={SyncIcon} />}
-        >
-          Alterar Dados
-        </Button>
+        <Box display='flex' gap={3} justifyContent='center'>
+          <Button
+            sx={{ marginTop: '20px', padding: '1rem', fontSize: '1.2em' }}
+            variant="contained"
+            color="primary"
+            onClick={handleFecharEdicao}
+            startIcon={<SyncIcon />}
+            >
+            Alterar Dados
+          </Button>
+          <Button
+            sx={{ marginTop: '20px', padding: '0.5rem', fontSize: '1.2em' }}
+            variant="contained"
+            color="error"
+            onClick={handleDeletarUser}
+            startIcon={<DeleteIcon />}
+            >
+            Deletar Conta
+          </Button>
+        </Box>
         <PopupAtualizarCadastro
-          open={openEditDialog}
+          open={abrirPopUp}
           onClose={handleEditClose}
           onSave={handleSaveData}
           userData={userData}
-        />
+          />
       </Box>
     </Paper>
   );

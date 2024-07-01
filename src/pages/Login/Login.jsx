@@ -3,14 +3,29 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../context/UserContext';
 import { useTemaContext } from '../../context/ThemeContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [erroLogin, setErroLogin] = useState("");
   const { colunas } = useTemaContext();
   const navigate = useNavigate();
-  const { loginUser } = useUsers();
+  const { loginUser, quantidadeUsers  } = useUsers();
+
+  const [totalUsers, setTotalUsers] = useState(null);
+
+  useEffect(() => {
+    const fetchTotalUsers = async () => {
+      try {
+        const total = await quantidadeUsers();
+        setTotalUsers(total);
+      } catch (error) {
+        console.error('Erro ao obter quantidade de usuários:', error.message);
+      }
+    };
+
+    fetchTotalUsers();
+  }, [quantidadeUsers]);
 
   const onSubmit = async (data) => {
     setErroLogin(""); // limpa outros erros
@@ -57,6 +72,7 @@ function Login() {
           >
             <Typography fontFamily="cursive" fontWeight="900" fontSize="2em">Login</Typography>
             <p>Bem-vindo(a) novamente!</p>
+            <Typography fontStyle="italic" fontSize="0.9em" fontWeight="300" >Total de usuários em nossa plataforma: {totalUsers}</Typography>
             <hr width={'250px'} />
             <Typography fontFamily="Inter" color="#777" fontWeight="400" fontSize="0.8em">Não possuí cadastro? <a style={{color: 'inherit', fontWeight: '900'}} href="/cadastro">Cadastre-se aqui</a></Typography>
             <img src="/sapiens.png" alt="login" width={'300px'} />

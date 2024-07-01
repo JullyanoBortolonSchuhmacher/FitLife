@@ -1,7 +1,7 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Box, Dialog, DialogTitle, DialogContent, DialogActions, Button, TextField, Grid, Typography, Paper } from '@mui/material';
-import EnderecoInput from '../components/inputEndereco'; 
+import EnderecoInput from '../components/inputEndereco';
 import PropTypes from 'prop-types';
 import GeneroSelect from '../components/inputGender';
 import SaveIcon from '@mui/icons-material/Save';
@@ -9,7 +9,7 @@ import SaveIcon from '@mui/icons-material/Save';
 const iconsFolder = '/iconesUser/';
 
 const PopupAtualizarCadastro = ({ open, onClose, onSave, userData }) => {
-  const { handleSubmit, control, setValue } = useForm({
+  const { handleSubmit, control, setValue, reset, watch } = useForm({
     defaultValues: {
       nome: userData.nome,
       genero: userData.genero,
@@ -19,15 +19,23 @@ const PopupAtualizarCadastro = ({ open, onClose, onSave, userData }) => {
     }
   });
 
+  const selectedAvatar = watch("avatar");
+
+  useEffect(() => {
+    if (userData) {
+      reset({
+        nome: userData.nome,
+        genero: userData.genero,
+        email: userData.email,
+        endereco: userData.endereco || {},
+        avatar: userData.avatar
+      });
+    }
+  }, [userData, reset]);
+
   const handleSave = (data) => {
     onSave(data);
   };
-
-  React.useEffect(() => {
-    if (userData.endereco) {
-      setValue("endereco", userData.endereco);
-    }
-  }, [userData, setValue]);
 
   return (
     <Dialog open={open} onClose={onClose}>
@@ -82,11 +90,14 @@ const PopupAtualizarCadastro = ({ open, onClose, onSave, userData }) => {
             {Array.from({ length: 7 }, (_, index) => (
               <Grid item key={index} xs={4} md={2} sx={{ alignItems: 'center' }}>
                 <Paper
-                  elevation={userData.avatar === `${iconsFolder}avatar${index + 1}.jpg` ? 3 : 1}
+                  elevation={selectedAvatar === `${iconsFolder}avatar${index + 1}.jpg` ? 3 : 1}
                   sx={{
                     padding: '8px',
                     cursor: 'pointer',
-                    border: userData.avatar === `${iconsFolder}avatar${index + 1}.jpg` ? '2px solid #3f51b5' : 'none'
+                    border: selectedAvatar === `${iconsFolder}avatar${index + 1}.jpg` ? '2px solid teal' : 'none',
+                    outline: selectedAvatar === `${iconsFolder}avatar${index + 1}.jpg` ? '2px solid teal' : 'none',
+                    transform: selectedAvatar === `${iconsFolder}avatar${index + 1}.jpg` ? 'scale(1.2)' : 'none',
+                    transition: 'transform 0.2s'
                   }}
                   onClick={() => setValue('avatar', `${iconsFolder}avatar${index + 1}.jpg`)}
                 >

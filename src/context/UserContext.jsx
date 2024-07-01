@@ -112,8 +112,22 @@ export const UserProvider = ({ children }) => {
     setUserData(null);
   };
 
+  const quantidadeUsers = async () => {
+    try {
+      const response = await fetch(`${apiUrl}/usuarios`);
+      if (!response.ok) {
+        throw new Error('Erro ao buscar usuários');
+      }
+      const usuarios = await response.json();
+      return usuarios.length;
+    } catch (error) {
+      console.error('Erro ao buscar quantidade de usuários:', error.message);
+      throw error;
+    }
+  };
+
   return (
-    <UserContext.Provider value={{ users, addUser, updateUser, deleteUser, getUser, getUserById, loginUser, logoutUser, isLogado }}>
+    <UserContext.Provider value={{ users, addUser, updateUser, deleteUser, getUser, getUserById, loginUser, quantidadeUsers, logoutUser, isLogado }}>
       {children}
     </UserContext.Provider>
   );
