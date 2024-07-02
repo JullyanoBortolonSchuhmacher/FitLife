@@ -10,7 +10,7 @@ import Profile from '../pages/User/Profile';
 const PrivateRoute = ({ children }) => {
   const { isLogado } = useUsers();
   
-  return isLogado ? children : <Navigate to="/login" />;
+  return isLogado ? children : <Navigate to="/login" />; // caso não esteja logado envia para o login (mas tem acesso ao home e ao cadastro)
 };
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     path: '/',
     element: (
       <>
-        <Header />
+        <Header /> {/** Foi o formato que encontrei para usar o header junto aos outros elementos */}
         <Home />
       </>
     ),
@@ -60,6 +60,7 @@ const router = createBrowserRouter([
         </PrivateRoute>
       </>
     ),
+    // Copyright Jullyano ;)
   },
   {
     path: '/profile',

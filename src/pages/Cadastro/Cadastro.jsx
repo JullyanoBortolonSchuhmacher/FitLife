@@ -8,7 +8,7 @@ import { useUsers } from '../../context/UserContext';
 import { useTemaContext } from '../../context/ThemeContext'
 
 function Cadastro() {
-  const numeroAleatorio = Math.floor(Math.random() * 7) + 1;
+  const numeroAleatorio = Math.floor(Math.random() * 7) + 1; // define um avatar aleatório
 
   const { register, handleSubmit, control, formState: { errors }, watch } = useForm({
     defaultValues: {
@@ -73,6 +73,7 @@ function Cadastro() {
         </Box>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box mx="8%" display='grid' gridTemplateColumns={`repeat(${colunas}, auto)`} gap={3} sx={{ paddingTop: colunas < 2 ? '10px' : '4%' }}>
+            {/* NOME */}
             <TextField
               type="text"
               id="nome"
@@ -84,12 +85,14 @@ function Cadastro() {
               helperText={errors.nome ? 'Nome deve ter pelo menos 3 caracteres' : ''}
               fullWidth
             />
+            {/* DATA DE NASCIMENTO */}
             <DataNascimentoInput
               control={control}
               name="dataNascimento"
               rules={{ required: 'Data de nascimento é obrigatória' }}
               error={errors.dataNascimento ? true : false}
             />
+            {/* CPF */}
             <CpfInput
               control={control}
               name="cpf"
@@ -97,6 +100,7 @@ function Cadastro() {
               error={!!errors.cpf}
               errorMessage={errors.cpf?.message}
             />
+            {/* SEXO / GENERO */}
             <GeneroSelect
               control={control}
               name="genero"
@@ -104,6 +108,7 @@ function Cadastro() {
               error={!!errors.genero}
             />
             <Box display='grid' gridTemplateColumns={`1, auto)`} gap={3}>
+              {/* E-MAIL */}
               <TextField
                 type="email"
                 id="email"
@@ -114,6 +119,7 @@ function Cadastro() {
                 error={errors.email ? true : false}
                 helperText={errors.email ? 'E-mail inválido' : ''}
               />
+              {/* CONFIRMACAO DE E-MAIL */}
               <TextField
                 type="email"
                 id="confirmaEmail"
@@ -130,6 +136,7 @@ function Cadastro() {
               />
             </Box>
               <Box display='grid' gridTemplateColumns={`repeat(1, auto)`} gap={3}>
+                {/* SENHA */}
                 <TextField
                   type="password"
                   id="senha"
@@ -143,6 +150,7 @@ function Cadastro() {
                   error={errors.senha ? true : false}
                   helperText={errors.senha ? errors.senha.message : ''}
                 />
+                {/* CONFIRMACAO DE SENHA */}
                 <TextField
                   type="password"
                   id="confirmaSenha"
@@ -160,6 +168,7 @@ function Cadastro() {
             </Box>
           </Box>
           <Box mx="8%">
+            {/* ENDEREÇO // com VIACEP */}
             <EnderecoInput
               control={control}
               name="endereco"
@@ -176,12 +185,15 @@ function Cadastro() {
               id="termos"
               required
             />
-            <Typography>Aceito os <a style={{color: 'inherit', fontWeight: '600'}} href="#termos">Termos de Serviço</a></Typography>
+            {/* TERMOS DE SERVIÇO 
+                ****** Não coloquei pois não quis entrar no burocrático, mas seria aqui que iria confirmar os termos
+            */}
+            <Typography>Aceito os <a style={{color: 'inherit', fontWeight: '600'}} href="#termos">Termos de Serviço</a></Typography> 
             {errors.termos && <Typography color="error">É necessário aceitar os termos</Typography>}
           </Box>
           <Box my={3} justifyContent='center' display='grid' gridTemplateColumns={`repeat(2, auto)`} gap={3}>
-            <Button type="submit" variant="contained">Cadastrar</Button>
-            <Button variant="outlined" href="/" >Voltar</Button>
+            <Button type="submit" variant="contained">Cadastrar</Button> {/** Cadastra */}
+            <Button variant="outlined" href="/" >Voltar</Button> {/** Volta para a Home */}
           </Box>
         </form>
       </Paper>

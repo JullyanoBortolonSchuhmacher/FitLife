@@ -14,16 +14,16 @@ const ExercicioCard = ({ exercicio }) => {
 
   const [popUpAberto, setPopUpAberto] = useState(false);
 
-  const handleAbrePopUp = () => {
+  const handleAbrePopUp = () => { //abre o Popup do mui 
     setPopUpAberto(true);
   };
 
-  const handleFechaPopUp = () => {
+  const handleFechaPopUp = () => { // fecha o popup
     setPopUpAberto(false);
   };
 
   const handleDeletarConf = () => {
-    if (window.confirm('Tem certeza de que deseja deletar este exercício?')) {
+    if (window.confirm('Tem certeza de que deseja deletar este exercício?')) { //abre a confirmação (HTML) para deletar o exercicio
       deletaExercicio(exercicio.id);
     }
   };

@@ -8,6 +8,8 @@ import { useController } from 'react-hook-form';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
+// o uso do dayjs é por causa da biblioteca MUI onde na documentação demonstrava utilizando ele.
+
 function DataNascimentoInput({ control, name, rules }) {
   const [dataAtual, setDataAtual] = useState(null);
   const { field } = useController({
@@ -19,7 +21,7 @@ function DataNascimentoInput({ control, name, rules }) {
 
   const handleDateChange = (date) => {
     setDataAtual(date);
-    field.onChange(date ? dayjs(date).format('YYYY-MM-DD') : '');
+    field.onChange(date ? dayjs(date).format('YYYY-MM-DD') : ''); //manda pro banco de dados nesse formato
   };
 
   return (
@@ -28,7 +30,7 @@ function DataNascimentoInput({ control, name, rules }) {
         label="Data de Nascimento"
         value={dataAtual}
         onChange={handleDateChange}
-        format="DD/MM/YYYY"
+        format="DD/MM/YYYY" 
         components={{
           TextField: (props) => <TextField {...props} />
         }}

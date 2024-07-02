@@ -21,8 +21,9 @@ const GeneroSelect = ({ control, name, rules, error }) => {
               display: 'grid',
               gridTemplateColumns: 'repeat(2, auto)',
             }}
+            // é no formato de ()X ()Y, antes era em select, mas assim fica mais pratico para o usuario preencher
           >
-            <FormControlLabel value="masculino" control={<Radio />} label="Masculino" />
+            <FormControlLabel value="masculino" control={<Radio />} label="Masculino" /> 
             <FormControlLabel value="feminino" control={<Radio />} label="Feminino" />
             <FormControlLabel value="outro" control={<Radio />} label="Outro" />
             <FormControlLabel value="prefironaodizer" control={<Radio />} label="Prefiro não dizer" />
