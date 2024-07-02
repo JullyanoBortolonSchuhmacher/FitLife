@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+//viaCep, sem muito segredos, retorna o cep ou erros caso tenha para o inputEndereco, 
+// não foi colocado tudo em um só arquivo para melhor legibilidade
+
 const useViaCep = () => {
   const [endereco, setEndereco] = useState(null);
   const [error, setError] = useState(null);

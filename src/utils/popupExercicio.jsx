@@ -12,18 +12,18 @@ const PopupExercicio = ({ open, onClose, exercicio }) => {
   
   const { colunas } = useTemaContext();
 
-  const onSubmit = (data) => {
+  const onSubmit = (data) => { //pega o id do usuario
     const userId = localStorage.getItem('userId');
     const newData = {
       ...data,
-      userId,
-      dataCriacao: new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }),
+      userId, //não mostra na página 
+      dataCriacao: new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }), // coloca a data no formato 00/00/0000, 00:00
     };
   
     if (exercicio) {
-      atualizarExercicio(exercicio.id, newData);
+      atualizarExercicio(exercicio.id, newData); //usa a data
     } else {
-      addExercicio(newData);
+      addExercicio(newData); 
     }
     onClose();
   };

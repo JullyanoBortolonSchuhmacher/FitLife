@@ -7,16 +7,16 @@ const ThemeContext = createContext();
 
 export const TemaProviderComponent = ({ children }) => {
   const [mode, setMode] = useState(() => {
-     return localStorage.getItem('tema') || 'dark';
+     return localStorage.getItem('tema') || 'dark'; //pega o tema do localStorage
   });
 
   useEffect(() => {
-    localStorage.setItem('tema', mode);
+    localStorage.setItem('tema', mode); //manda o tema pro localStorage (também)
   }, [mode]);
 
-  useTemaGlobal(mode);
+  useTemaGlobal(mode); //define o modo para o uso do tema abaixo
 
-  const tema = createTheme({
+  const tema = createTheme({ //tema Global(mui)
     palette: {
       mode: mode || 'light',
       primary: {
@@ -38,13 +38,13 @@ export const TemaProviderComponent = ({ children }) => {
     },
   });
 
-  const isMobile = useMediaQuery(tema.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(tema.breakpoints.down('sm')); //define o tamanho das colunas/rows para as telas
   const isTablet = useMediaQuery(tema.breakpoints.down('md'));
   const colunas = isMobile ? 1 : isTablet ? 2 : 3;
-  const gridRows = isMobile ? 1 : isTablet ? 2 : 3;
+  //remocção do gridRows (não estava sendo usado)
 
   return (
-    <ThemeContext.Provider value={{ tema, mode, setMode, colunas, gridRows }}>
+    <ThemeContext.Provider value={{ tema, mode, setMode, colunas }}>
       <ThemeProvider theme={tema}>
         {children}
       </ThemeProvider>

@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+// de acordo com o tema ele muda o index.css (para os elementos html)
+
 const aplicarTema = (mode) => {
   const root = document.documentElement;
   if (mode === 'dark') {

@@ -3,6 +3,7 @@ import { Controller } from 'react-hook-form';
 import { TextField, Link } from '@mui/material';
 import PropTypes from 'prop-types';
 import { UserContext } from '../context/UserContext';
+import { apiUrl } from '../config';
 
 const InputCpf = ({ control, name, rules, error, errorMessage }) => {
   const { users } = useContext(UserContext);
@@ -11,18 +12,18 @@ const InputCpf = ({ control, name, rules, error, errorMessage }) => {
 
   useEffect(() => {
     const checaCpfExistente = async () => {
-      const response = await fetch('http://localhost:3001/usuarios');
+      const response = await fetch(`${apiUrl}/usuarios`); //pega da config geral (caso mude alguma coisa facilita o uso do fetch)
       const data = await response.json();
       const cpfLista = data.map(user => user.cpf);
 
       if (cpfLista.includes(cpf)) {
-        setCpfError('CPF já cadastrado. Clique aqui para fazer login.');
+        setCpfError('CPF já cadastrado. Clique aqui para fazer login.'); //caso ja exista esse cpf
       } else {
         setCpfError('');
       }
     };
 
-    if (cpf.length === 14) {
+    if (cpf.length === 14) { 
       checaCpfExistente();
     } else {
       setCpfError('');
@@ -33,7 +34,7 @@ const InputCpf = ({ control, name, rules, error, errorMessage }) => {
     let value = event.target.value;
     value = value.replace(/\D/g, '');
 
-    if (value.length === 0) {
+    if (value.length === 0) { //separa o valor do cpf para o formato "000.000.000-00"
       setCpf('');
     } else if (value.length <= 3) {
       setCpf(value);
@@ -69,7 +70,7 @@ const InputCpf = ({ control, name, rules, error, errorMessage }) => {
           helperText={fieldState.invalid || cpfError ? (cpfError || errorMessage) : ''}
           InputProps={{
             endAdornment: cpfError && (
-              <Link href="/login" color="error">
+              <Link href="/login" color="error"> {/*caso tenha um cpf ele manda como um erro para fazer o login */}
                 {cpfError}
               </Link>
             ),

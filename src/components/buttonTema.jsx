@@ -15,7 +15,7 @@ const BotaoTema = () => {
   const IconComponent = mode === 'light' ? DarkModeOutlinedIcon : LightModeOutlinedIcon;
 
   const toggleTheme = () => {
-    const newMode = mode === 'light' ? 'dark' : 'light';
+    const newMode = mode === 'light' ? 'dark' : 'light'; //muda o tema e coloca no localStorage
     setMode(newMode);
     localStorage.setItem('tema', newMode);
   };
