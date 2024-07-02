@@ -12,13 +12,13 @@ export const ExerciciosProvider = ({ children }) => {
     fetchExercicios();
   }, []);
 
-  const fetchExercicios = async () => {
-    const response = await fetch(`${apiUrl}/exercicios`);
+  const fetchExercicios = async () => { //faz o fetch nos exercicios pegando os dados
+    const response = await fetch(`${apiUrl}/exercicios`); 
     const data = await response.json();
     setExercicios(data);
   };
 
-  const addExercicio = async (novoExercicio) => {
+  const addExercicio = async (novoExercicio) => { // adiciona outro exercicio no cadastro
     const response = await fetch(`${apiUrl}/exercicios`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,7 +28,7 @@ export const ExerciciosProvider = ({ children }) => {
     setExercicios((prev) => [...prev, data]);
   };
 
-  const atualizarExercicio = async (id, updatedExercicio) => {
+  const atualizarExercicio = async (id, updatedExercicio) => { //atualiza o exercicio 
     await fetch(`${apiUrl}/exercicios/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ export const ExerciciosProvider = ({ children }) => {
     );
   };
 
-  const deletaExercicio = async (id) => {
+  const deletaExercicio = async (id) => { // deleta o exercicio 
     await fetch(`${apiUrl}/exercicios/${id}`, { method: 'DELETE' });
     setExercicios((prev) => prev.filter((exercicio) => exercicio.id !== id));
   };

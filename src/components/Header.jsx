@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import BotaoTema from './buttonTema';
 import AvatarMenu from '../utils/AvatarMenu';
 import { useUsers } from '../context/UserContext';
-import { useEffect, useState } from 'react';
+import { useState } from 'react'; //retirando a importação do useEffect 
 
 const Header = () => {
   const { isLogado, logoutUser } = useUsers();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = () => {  // caso esteja logado aparece o avatar se não manda para a página de login
     if (isLogado) {
       logoutUser();
     } else {
@@ -18,7 +18,7 @@ const Header = () => {
     }
   };
 
-  const handleDarkMode = () => {
+  const handleDarkMode = () => { //verifica o tema
     setIsDarkMode(!isDarkMode);
   };
 

@@ -13,10 +13,10 @@ export const UserProvider = ({ children }) => {
 
 
   useEffect(() => {
-    localStorage.setItem('logado', JSON.stringify(isLogado));
+    localStorage.setItem('logado', JSON.stringify(isLogado)); //atualiza o localStorage caso esteja logado ou não para o uso das rotas privadas
   }, [isLogado]);
 
-  const addUser = (user) => {
+  const addUser = (user) => { //adiciona um usuario ao sistema
     fetch(`${apiUrl}/usuarios`, {
       method: 'POST',
       headers: {
@@ -30,7 +30,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const updateUser = (updatedUser) => {
+  const updateUser = (updatedUser) => { // atualiza o usuario (usado no popup)
     fetch(`${apiUrl}/usuarios/${updatedUser.id}`, {
       method: 'PUT',
       headers: {
@@ -54,7 +54,7 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const deleteUser = (userId) => {
+  const deleteUser = (userId) => { //deleta o usuario (no perfil)
     fetch(`${apiUrl}/usuarios/${userId}`, {
       method: 'DELETE',
     })
@@ -69,11 +69,11 @@ export const UserProvider = ({ children }) => {
     });
   };
 
-  const getUser = () => {
+  const getUser = () => { //pega os dados do usuario
     return userData;
   };
 
-  const getUserById = async (userId) => {
+  const getUserById = async (userId) => { //pega o id do usuario
     try {
       const response = await fetch(`${apiUrl}/usuarios/${userId}`);
       if (!response.ok) {
@@ -87,14 +87,14 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const loginUser = (email, senha) => {
+  const loginUser = (email, senha) => { //faz o login do usuario
     return fetch(`${apiUrl}/usuarios`)
       .then(response => response.json())
       .then(users => {
         const user = users.find(user => user.email === email && user.senha === senha);
         if (user) {
-          localStorage.setItem('userId', user.id.toString());
-          localStorage.setItem('userAvatar', user.avatar.toString());
+          localStorage.setItem('userId', user.id.toString()); //coloca o id do usuario no localStorage 
+          localStorage.setItem('userAvatar', user.avatar.toString()); //coloca o avatar dele no localStorage 
           setIsLogado(true);
           setUserData(user);
           return user;
@@ -105,14 +105,14 @@ export const UserProvider = ({ children }) => {
       });
   };
 
-  const logoutUser = () => {
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userAvatar');
+  const logoutUser = () => { // faz o logout do sistema
+    localStorage.removeItem('userId'); //remove o id do usuario
+    localStorage.removeItem('userAvatar'); //remove o avatar do usuario do localStorage (para evitar problemas)
     setIsLogado(false);
     setUserData(null);
   };
 
-  const quantidadeUsers = async () => {
+  const quantidadeUsers = async () => { //pega o tamanho do array dentro do banco de dados
     try {
       const response = await fetch(`${apiUrl}/usuarios`);
       if (!response.ok) {
@@ -127,7 +127,7 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ users, addUser, updateUser, deleteUser, getUser, getUserById, loginUser, quantidadeUsers, logoutUser, isLogado }}>
+    <UserContext.Provider value={{ users, addUser, updateUser, deleteUser, getUser, getUserById, loginUser, quantidadeUsers, logoutUser, isLogado }}> {/*envia tudo*/}
       {children}
     </UserContext.Provider>
   );

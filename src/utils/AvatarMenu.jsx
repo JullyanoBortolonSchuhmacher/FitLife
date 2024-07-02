@@ -12,19 +12,19 @@ const AvatarMenu = ({ handleLogin }) => {
   const navigate = useNavigate();
 
   const userData = getUser();
-  const avatarUrl = localStorage.getItem('userAvatar');
+  const avatarUrl = localStorage.getItem('userAvatar'); //pega o avatar do localStorage para colocar como avatar(dentro do header)
   const avatar = avatarUrl ? avatarUrl : defaultAvatar;
 
-  const handleOpenUserMenu = (event) => {
+  const handleAbreUserMenu = (event) => { //abre o menu do usuario (o que pode levar ao profile e dashboard ou fazer o logout)
     setAnchoredUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleFechaUserMenu = () => { //fecha o menu do usuario 
     setAnchoredUser(null);
   };
 
   const handleMenuItemClick = (setting) => {
-    handleCloseUserMenu();
+    handleFechaUserMenu();
     if (setting.toLowerCase() === 'logout') {
       handleLogin();
       logoutUser();
@@ -39,7 +39,7 @@ const AvatarMenu = ({ handleLogin }) => {
     <Box sx={{ flexGrow: 0 }}>
       {isLogado ? (
         <Tooltip title="Open settings">
-          <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+          <IconButton onClick={handleAbreUserMenu} sx={{ p: 0 }}>
             <Avatar alt="User Avatar" src={avatar} />
           </IconButton>
         </Tooltip>
@@ -68,7 +68,7 @@ const AvatarMenu = ({ handleLogin }) => {
           horizontal: 'right',
         }}
         open={Boolean(anchoredUser)}
-        onClose={handleCloseUserMenu}
+        onClose={handleFechaUserMenu}
       >
         {settings.map((setting) => (
           <MenuItem key={setting} onClick={() => handleMenuItemClick(setting)}>

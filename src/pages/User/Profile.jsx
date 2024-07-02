@@ -12,7 +12,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem('userId'); //pega o id do localStorage para realizar a atualização
       if (userId) {
         const user = await getUserById(userId);
         setUserData(user);
@@ -22,22 +22,22 @@ const Profile = () => {
     fetchUser();
   }, [getUserById]);
 
-  const handleFecharEdicao = () => {
+  const handleFecharEdicao = () => { //fecha o popup de edição dos dados do usuario
     setAbrirPopUp(true);
   };
 
-  const handleEditClose = () => {
+  const handleEditClose = () => { // fecha o popup
     setAbrirPopUp(false);
   };
 
-  const handleSaveData = async (updatedData) => {
-    const updatedUser = { ...userData, ...updatedData };
-    await updateUser(updatedUser);
-    setUserData(updatedUser);
+  const handleSaveData = async (updatedData) => { // salva os dados e atualiza no banco de dados
+    const userAtualizado = { ...userData, ...updatedData };
+    await updateUser(userAtualizado);
+    setUserData(userAtualizado);
     setAbrirPopUp(false);
   };
 
-  const handleDeletarUser = async () => {
+  const handleDeletarUser = async () => { //deleta o usuario após confirmar na tela pedindo a confirmação
     if (window.confirm('Tem certeza que deseja deletar sua conta? Esta ação não pode ser desfeita.')) {
       await deleteUser(userData.id);
       logoutUser();

@@ -10,7 +10,7 @@ const iconsFolder = '/iconesUser/';
 
 const PopupAtualizarCadastro = ({ open, onClose, onSave, userData }) => {
   const { handleSubmit, control, setValue, reset, watch } = useForm({
-    defaultValues: {
+    defaultValues: { // coloquei o que eu acho que pode mudar de acordo com o tempo
       nome: userData.nome,
       genero: userData.genero,
       email: userData.email,
@@ -19,7 +19,7 @@ const PopupAtualizarCadastro = ({ open, onClose, onSave, userData }) => {
     }
   });
 
-  const selectedAvatar = watch("avatar");
+  const selectedAvatar = watch("avatar"); //é o meio para caso mude a imagem de avatar  
 
   useEffect(() => {
     if (userData) {

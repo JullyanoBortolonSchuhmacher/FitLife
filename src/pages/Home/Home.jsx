@@ -32,15 +32,18 @@ const Home = () => {
           p: 4,
         }}
       >
+        {/* titulo */}
         <Paper sx={{ p: 4, borderRadius: 2, maxWidth: 600 }}>
           <Typography variant="h3" component="h1" gutterBottom>
             Bem-vindo ao FitLife
           </Typography>
+          {/* breve apresentação da plataforma */}
           <Typography variant="body1" paragraph>
             FitLife é o seu parceiro ideal para alcançar seus objetivos de condicionamento físico e saúde.
             Crie um perfil, defina suas metas, registre suas atividades físicas e acompanhe seu progresso, tudo em um só lugar.
           </Typography>
           <Box mt={4}>
+            {/* Botão para enviar para o cadastro (não logado) dashboard (quando logado) */}
             <Button variant="contained" color="primary" component={RouterLink} to="/dashboard">
               Comece agora
             </Button>

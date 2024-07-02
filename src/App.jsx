@@ -1,4 +1,4 @@
-import './App.css'
+// só ta aqui por sentimentalismo
 
 function App() {
 

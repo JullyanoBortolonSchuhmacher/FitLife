@@ -10,6 +10,8 @@ const setColumnsBasedOnScreenSize = () => {
     columns = 1; // Mobile
   }
 
+  //coloca o tamanho da tela no localStorage
+
   localStorage.setItem('colunas', columns.toString());
 };
 

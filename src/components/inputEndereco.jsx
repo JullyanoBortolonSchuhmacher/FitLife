@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import estados from '../data/estados.json';
-import useViaCep from '../hook/viaCep';
+import useViaCep from '../hook/viaCep'; //importa o viacep
 
 const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
   const { endereco, error: cepError, fetchEndereco } = useViaCep();
@@ -28,6 +28,8 @@ const EnderecoInput = ({ control, name, rules, error, errorMessage }) => {
                 error={!!error || !!cepError}
                 helperText={errorMessage || cepError}
                 onBlur={() => fetchEndereco(field.value)} 
+                //usa o viacep caso esteja de acordo com as regras (8 caracteres, apenas numeros, ...)
+                //Já preenche os outros campos com a Api
               />
             )}
           />

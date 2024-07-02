@@ -31,17 +31,18 @@ function Login() {
     setErroLogin(""); // limpa outros erros
     try {
       const user = await loginUser(data.email, data.senha);
-      console.log("Login realizado", user.email, );
-      console.log(`Bem vind${user.genero === 'feminino' ? 'a' : 'o'}`, user.nome);
+      console.log("Login realizado", user.email, ); //login realizado, avisa no console
+      console.log(`Bem vind${user.genero === 'feminino' ? 'a' : 'o'}`, user.nome); // da o bem vindo no console, com a diferença de feminino e masculino
 
       setTimeout(() => {
         navigate("/dashboard");
-      }, 1000);
+      }, 800); // depois de 0.8 segundos ele enviará para a dashboard (seria para o login mas a pessoa pode cadastrar mesmo logada, com as rotas privadas faz com que vá para o login)
     } catch (error) {
       setErroLogin(error.message);
     }
   };
 
+  // coloquei o melhor que pude da resposividade
   return (
     <Box
       display="flex"
